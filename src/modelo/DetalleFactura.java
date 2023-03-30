@@ -17,6 +17,7 @@ public class DetalleFactura {
     private ArrayList<Repuesto> idRepusto;
     private ArrayList<Factura> idFactura;
     private ArrayList<Ingresos> idIngreso;
+    private String fecha;
     
     public DetalleFactura(){
         
