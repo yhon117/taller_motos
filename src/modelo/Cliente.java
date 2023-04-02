@@ -18,12 +18,13 @@ public class Cliente {
     private String telefono;
     private String direccion;
     private String correo;
+    private String paswoord;
 
     public Cliente(){
         
     }
     
-    public Cliente(int idCliente, String cedula, String nombre, String apellido, String telefono, String direccion, String correo) {
+    public Cliente(int idCliente, String cedula, String nombre, String apellido, String telefono, String direccion, String correo,String paswoord) {
         this.idCliente = idCliente;
         this.cedula = cedula;
         this.nombre = nombre;
@@ -31,6 +32,7 @@ public class Cliente {
         this.telefono = telefono;
         this.direccion = direccion;
         this.correo = correo;
+        this.paswoord=paswoord;
     }
 
     public int getIdCliente() {
@@ -88,5 +90,14 @@ public class Cliente {
     public void setCorreo(String correo) {
         this.correo = correo;
     }
+
+    public String getPaswoord() {
+        return paswoord;
+    }
+
+    public void setPaswoord(String paswoord) {
+        this.paswoord = paswoord;
+    }
+    
     
 }
