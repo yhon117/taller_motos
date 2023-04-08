@@ -5,6 +5,8 @@
  */
 package vista;
 
+import java.awt.BorderLayout;
+
 /**
  *
  * @author jhonb
@@ -16,6 +18,8 @@ public class VistaPrincipal extends javax.swing.JFrame {
      */
     public VistaPrincipal() {
         initComponents();
+                this.setLocationRelativeTo(null);
+
     }
 
     /**
@@ -27,87 +31,131 @@ public class VistaPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        escritorio = new javax.swing.JDesktopPane();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jmIncio = new javax.swing.JMenu();
-        itemCerrarSecion = new javax.swing.JMenuItem();
-        jmMoto = new javax.swing.JMenu();
-        itAlladirMoto = new javax.swing.JMenuItem();
-        jmServicios = new javax.swing.JMenu();
-        jmRepuesto = new javax.swing.JMenu();
+        jPanel1 = new javax.swing.JPanel();
+        btnRejistrarMoto = new javax.swing.JButton();
+        btnServicios = new javax.swing.JButton();
+        btnRepuesto = new javax.swing.JButton();
+        escritorio = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jPanel1.setBackground(new java.awt.Color(204, 204, 204));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Opciones"));
+
+        btnRejistrarMoto.setText("Rejistrar moto");
+        btnRejistrarMoto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRejistrarMotoActionPerformed(evt);
+            }
+        });
+
+        btnServicios.setText("Servicios");
+        btnServicios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnServiciosActionPerformed(evt);
+            }
+        });
+
+        btnRepuesto.setText("Repusto");
+        btnRepuesto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRepuestoActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnRejistrarMoto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnServicios, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnRepuesto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(38, 38, 38)
+                .addComponent(btnRejistrarMoto)
+                .addGap(34, 34, 34)
+                .addComponent(btnServicios)
+                .addGap(31, 31, 31)
+                .addComponent(btnRepuesto)
+                .addContainerGap(331, Short.MAX_VALUE))
+        );
+
+        escritorio.setBackground(new java.awt.Color(0, 102, 102));
 
         javax.swing.GroupLayout escritorioLayout = new javax.swing.GroupLayout(escritorio);
         escritorio.setLayout(escritorioLayout);
         escritorioLayout.setHorizontalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 620, Short.MAX_VALUE)
+            .addGap(0, 498, Short.MAX_VALUE)
         );
         escritorioLayout.setVerticalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 473, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
-
-        jmIncio.setText("Inicio");
-
-        itemCerrarSecion.setText("Cerrar Secion");
-        jmIncio.add(itemCerrarSecion);
-
-        jMenuBar1.add(jmIncio);
-
-        jmMoto.setText("Moto");
-        jmMoto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jmMotoActionPerformed(evt);
-            }
-        });
-
-        itAlladirMoto.setText("Alladir moto");
-        itAlladirMoto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                itAlladirMotoActionPerformed(evt);
-            }
-        });
-        jmMoto.add(itAlladirMoto);
-
-        jMenuBar1.add(jmMoto);
-
-        jmServicios.setText("Servicios");
-        jMenuBar1.add(jmServicios);
-
-        jmRepuesto.setText("Repusto");
-        jMenuBar1.add(jmRepuesto);
-
-        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(escritorio)
-                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(escritorio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(escritorio, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(escritorio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jmMotoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmMotoActionPerformed
+    private void btnRejistrarMotoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRejistrarMotoActionPerformed
         // TODO add your handling code here:
-       
-    }//GEN-LAST:event_jmMotoActionPerformed
+        PanelCrearMoto panelMoto = new PanelCrearMoto();
+        panelMoto.setSize(500,530);
+        panelMoto.setLocation(0,0);
+        escritorio.removeAll();
+        escritorio.add(panelMoto,BorderLayout.CENTER);
+        escritorio.revalidate();
+        escritorio.repaint();
+    }//GEN-LAST:event_btnRejistrarMotoActionPerformed
 
-    private void itAlladirMotoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itAlladirMotoActionPerformed
+    private void btnServiciosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnServiciosActionPerformed
         // TODO add your handling code here:
-         VistaCrearMoto vistaMoto = new VistaCrearMoto();
-        escritorio.add(vistaMoto);
-        vistaMoto.setVisible(true);
-    }//GEN-LAST:event_itAlladirMotoActionPerformed
+       PanelServicios panelServicios = new PanelServicios();
+       panelServicios.setSize(500,500);
+       panelServicios.setLocation(0,0);
+        escritorio.removeAll();
+        escritorio.add(panelServicios,BorderLayout.CENTER);
+        escritorio.revalidate();
+        escritorio.repaint();
+    }//GEN-LAST:event_btnServiciosActionPerformed
+
+    private void btnRepuestoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRepuestoActionPerformed
+        // TODO add your handling code here:
+          PanelRepuesto panelRepuesto = new PanelRepuesto();
+       panelRepuesto.setSize(500,500);
+       panelRepuesto.setLocation(0,0);
+        escritorio.removeAll();
+        escritorio.add(panelRepuesto,BorderLayout.CENTER);
+        escritorio.revalidate();
+        escritorio.repaint();
+    }//GEN-LAST:event_btnRepuestoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -145,13 +193,10 @@ public class VistaPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JDesktopPane escritorio;
-    private javax.swing.JMenuItem itAlladirMoto;
-    private javax.swing.JMenuItem itemCerrarSecion;
-    private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenu jmIncio;
-    private javax.swing.JMenu jmMoto;
-    private javax.swing.JMenu jmRepuesto;
-    private javax.swing.JMenu jmServicios;
+    private javax.swing.JButton btnRejistrarMoto;
+    private javax.swing.JButton btnRepuesto;
+    private javax.swing.JButton btnServicios;
+    private javax.swing.JPanel escritorio;
+    private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }
