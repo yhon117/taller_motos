@@ -31,7 +31,7 @@ public class PanelRepuesto extends javax.swing.JPanel {
     public PanelRepuesto() {
         initComponents();
         lbPrecioRepuesto.setText("");
-        servicioCon.cosultaMotoServicio(cbRepuesto);
+        servicioCon.cosultaMotoServicio(cbElejirMoto);
         DefaultComboBoxModel mostrarNombre = new DefaultComboBoxModel(repuesto.nombreRepuesto());
         cbRepuesto.setModel(mostrarNombre);
     }
@@ -111,7 +111,7 @@ public class PanelRepuesto extends javax.swing.JPanel {
     private void cbRepuestoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbRepuestoItemStateChanged
         // TODO add your handling code here:
         if (evt.getStateChange() == ItemEvent.SELECTED) {
-            Repuesto repuestoCon = (Repuesto) cbRepuesto.getSelectedItem();
+           Repuesto repuestoCon = (Repuesto) cbRepuesto.getSelectedItem();
             try {
                 PreparedStatement ps;
                 ResultSet rs;
