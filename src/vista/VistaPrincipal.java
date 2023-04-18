@@ -13,13 +13,22 @@ import java.awt.BorderLayout;
  */
 public class VistaPrincipal extends javax.swing.JFrame {
 
+    VistaLogin login = new VistaLogin();
     /**
      * Creates new form VistaPrincipal
      */
     public VistaPrincipal() {
         initComponents();
                 this.setLocationRelativeTo(null);
-
+                validar(login);
+        
+    }
+    public void validar(VistaLogin lo){
+        VistaLogin aux=null;
+        for(int i=0; i<lo.user.size();i++){
+            lbNombre.setText(lo.user.get(i).getNombre());
+            lbApellido.setText(lo.user.get(i).getApellido());
+        }
     }
 
     /**
@@ -36,6 +45,13 @@ public class VistaPrincipal extends javax.swing.JFrame {
         btnServicios = new javax.swing.JButton();
         btnRepuesto = new javax.swing.JButton();
         escritorio = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        lbNombre = new javax.swing.JLabel();
+        lbApellido = new javax.swing.JLabel();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        mnCerar = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -84,7 +100,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
                 .addComponent(btnServicios)
                 .addGap(31, 31, 31)
                 .addComponent(btnRepuesto)
-                .addContainerGap(331, Short.MAX_VALUE))
+                .addContainerGap(247, Short.MAX_VALUE))
         );
 
         escritorio.setBackground(new java.awt.Color(0, 102, 102));
@@ -97,8 +113,30 @@ public class VistaPrincipal extends javax.swing.JFrame {
         );
         escritorioLayout.setVerticalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 536, Short.MAX_VALUE)
         );
+
+        jLabel1.setText("Nombre");
+
+        jLabel2.setText("Apellido");
+
+        lbNombre.setText("jLabel3");
+
+        lbApellido.setText("jLabel4");
+
+        jMenu1.setText("Salir");
+
+        mnCerar.setText("Cerrar Secion");
+        mnCerar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnCerarActionPerformed(evt);
+            }
+        });
+        jMenu1.add(mnCerar);
+
+        jMenuBar1.add(jMenu1);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -106,7 +144,16 @@ public class VistaPrincipal extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lbNombre))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lbApellido)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(escritorio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -114,10 +161,18 @@ public class VistaPrincipal extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(escritorio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(escritorio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(lbNombre))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(lbApellido))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
 
@@ -156,6 +211,13 @@ public class VistaPrincipal extends javax.swing.JFrame {
         escritorio.revalidate();
         escritorio.repaint();
     }//GEN-LAST:event_btnRepuestoActionPerformed
+
+    private void mnCerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnCerarActionPerformed
+        // TODO add your handling code here:
+         VistaLogin salir = new VistaLogin();
+        salir.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_mnCerarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -197,6 +259,13 @@ public class VistaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnRepuesto;
     private javax.swing.JButton btnServicios;
     private javax.swing.JPanel escritorio;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel lbApellido;
+    private javax.swing.JLabel lbNombre;
+    private javax.swing.JMenuItem mnCerar;
     // End of variables declaration//GEN-END:variables
 }

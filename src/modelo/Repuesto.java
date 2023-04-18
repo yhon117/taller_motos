@@ -79,37 +79,7 @@ public class Repuesto {
     public String toString(){
         return this.nombreRepuesto;
     }
-       public Vector<Repuesto> nombreRepuesto() {
-        String sql = "select * from repuesto";
-        Conexion conexion = new Conexion();
-
-        PreparedStatement ps;
-        ResultSet rs;
-        Vector<Repuesto> repuesto = new Vector<Repuesto>();
-        Repuesto res = null;
-        try {
-            Connection con = conexion.conexion();
-            ps = con.prepareStatement(sql);
-            rs = ps.executeQuery();
-
-            res = new Repuesto();
-            res.setIdRepuesto(0);
-            res.setNombreRepuesto("seleciona un repuesto");
-            repuesto.add(res);
-
-            while (rs.next()) {
-                res = new Repuesto();
-                res.setIdRepuesto(rs.getInt("idrepuesto"));
-                res.setNombreRepuesto(rs.getString("nombreRepuesto"));
-                repuesto.add(res);
-
-            }
-            rs.close();
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e.toString());
-        }
-        return repuesto;
-    }
+      
     
     
 }

@@ -27,116 +27,70 @@ import modelo.Servicio;
  */
 public class ServicioController {
 
-//    public void cosultaNombreServicio(JComboBox nombreServicio) {
-//        String sql = "select nombre from servicios";
-//        Conexion conexion = new Conexion();
-//
-//        PreparedStatement ps;
-//        ResultSet rs;
-//        try {
-//            Connection con = conexion.conexion();
-//            ps = con.prepareStatement(sql);
-//            rs = ps.executeQuery();
-//            nombreServicio.addItem("selecione un servicio");
-//            while (rs.next()) {
-//                nombreServicio.addItem(rs.getString("nombre"));
-//
-//            }
-//        } catch (SQLException e) {
-//            JOptionPane.showMessageDialog(null, e.toString());
-//        }
-//    }
-
-//    public Vector<Servicio> nombreServicio() {
-//        String sql = "select * from servicios";
-//        Conexion conexion = new Conexion();
-//
-//        PreparedStatement ps;
-//        ResultSet rs;
-//        Vector<Servicio> servicio = new Vector<Servicio>();
-//        Servicio ser = null;
-//        try {
-//            Connection con = conexion.conexion();
-//            ps = con.prepareStatement(sql);
-//            rs = ps.executeQuery();
-//
-//            ser = new Servicio();
-//            ser.setIdServicio(0);
-//            ser.setNombre("seleciona un servicio");
-//            servicio.add(ser);
-//
-//            while (rs.next()) {
-//                ser = new Servicio();
-//                ser.setIdServicio(rs.getInt("id_srevicio"));
-//                ser.setNombre(rs.getString("nombre"));
-//                servicio.add(ser);
-//
-//            }
-//            rs.close();
-//        } catch (SQLException e) {
-//            JOptionPane.showMessageDialog(null, e.toString());
-//        }
-//        return servicio;
-//    }
-
-    public void cosultaMotoServicio(JComboBox motoServicio) {
-        String sql = "select placa from moto";
+  public Vector<Servicio> nombreServicio() {
+        String sql = "select * from servicios";
         Conexion conexion = new Conexion();
 
         PreparedStatement ps;
         ResultSet rs;
+        Vector<Servicio> servicio = new Vector<Servicio>();
+        Servicio ser = null;
         try {
             Connection con = conexion.conexion();
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
-            motoServicio.addItem("selecione una moto para el servicio");
+
+            ser = new Servicio();
+            ser.setIdServicio(0);
+            ser.setNombre("seleciona un servicio");
+            servicio.add(ser);
 
             while (rs.next()) {
-                motoServicio.addItem(rs.getString("placa"));
+                ser = new Servicio();
+                ser.setIdServicio(rs.getInt("id_srevicio"));
+                ser.setNombre(rs.getString("nombre"));
+                servicio.add(ser);
 
             }
+            rs.close();
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e.toString());
         }
-
+        return servicio;
     }
 
-    public void cosultaPrecioServicio(JLabel precioServicio) {
-        String sql = "select precio from servicios";
+    public Vector<Moto> nombreMoto(){
+        String sql="select*from moto";
         Conexion conexion = new Conexion();
-
         PreparedStatement ps;
         ResultSet rs;
+        Vector<Moto> moto = new Vector<>();
+        Moto mot=null;
         try {
             Connection con = conexion.conexion();
-            ps = con.prepareStatement(sql);
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                precioServicio.setText(rs.getString("precio"));
-
+            ps=con.prepareStatement(sql);
+            rs=ps.executeQuery();
+            
+            mot = new Moto();
+            mot.setIdMoto(0);
+            mot.setPlaca("selecione una placa");
+            moto.add(mot);
+            
+            while(rs.next()){
+                mot=new Moto();
+                mot.setIdMoto(rs.getInt("idmoto"));
+                mot.setPlaca(rs.getString("placa"));
+                moto.add(mot);
             }
+            rs.close();
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e.toString());
-        }
-    }
+           JOptionPane.showMessageDialog(null, e.toString());
 
-//    public void cosultaDescripcionServicio(JTextArea descripcioServicio) {
-//        String sql = "select descripcion from servicios";
-//        Conexion conexion = new Conexion();
-//
-//        PreparedStatement ps;
-//        ResultSet rs;
-//        try {
-//            Connection con = conexion.conexion();
-//            ps = con.prepareStatement(sql);
-//            rs = ps.executeQuery();
-//            while (rs.next()) {
-//                descripcioServicio.append(rs.getString("descripcion"));
-//
-//            }
-//        } catch (SQLException e) {
-//            JOptionPane.showMessageDialog(null, e.toString());
-//        }
-//    }
+        }
+        return moto;
+    }
+    
+
+ 
 
 }

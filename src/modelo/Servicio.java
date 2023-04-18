@@ -80,36 +80,6 @@ public class Servicio {
     public String toString(){
         return this.nombre;
     }
-       public Vector<Servicio> nombreServicio() {
-        String sql = "select * from servicios";
-        Conexion conexion = new Conexion();
-
-        PreparedStatement ps;
-        ResultSet rs;
-        Vector<Servicio> servicio = new Vector<Servicio>();
-        Servicio ser = null;
-        try {
-            Connection con = conexion.conexion();
-            ps = con.prepareStatement(sql);
-            rs = ps.executeQuery();
-
-            ser = new Servicio();
-            ser.setIdServicio(0);
-            ser.setNombre("seleciona un servicio");
-            servicio.add(ser);
-
-            while (rs.next()) {
-                ser = new Servicio();
-                ser.setIdServicio(rs.getInt("id_srevicio"));
-                ser.setNombre(rs.getString("nombre"));
-                servicio.add(ser);
-
-            }
-            rs.close();
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e.toString());
-        }
-        return servicio;
-    }
+     
     
 }

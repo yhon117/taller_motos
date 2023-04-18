@@ -6,6 +6,7 @@
 package vista;
 
 import conexion.Conexion;
+import controlador.RepuestoController;
 import controlador.ServicioController;
 import java.awt.event.ItemEvent;
 import java.sql.Connection;
@@ -15,6 +16,7 @@ import java.sql.SQLException;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import modelo.Moto;
 import modelo.Repuesto;
 
 /**
@@ -28,12 +30,15 @@ public class PanelRepuesto extends javax.swing.JPanel {
      */
     Repuesto repuesto = new Repuesto();
     ServicioController servicioCon = new ServicioController();
+    RepuestoController repuestoCon = new RepuestoController();
     public PanelRepuesto() {
         initComponents();
         lbPrecioRepuesto.setText("");
-        servicioCon.cosultaMotoServicio(cbElejirMoto);
-        DefaultComboBoxModel mostrarNombre = new DefaultComboBoxModel(repuesto.nombreRepuesto());
+        //servicioCon.cosultaMotoServicio(cbElejirMoto);
+        DefaultComboBoxModel mostrarNombre = new DefaultComboBoxModel(repuestoCon.nombreRepuesto());
         cbRepuesto.setModel(mostrarNombre);
+         DefaultComboBoxModel mostrarPlaca = new DefaultComboBoxModel(servicioCon.nombreMoto());
+        cbElejirMoto.setModel(mostrarPlaca);
     }
 
     /**
@@ -51,8 +56,18 @@ public class PanelRepuesto extends javax.swing.JPanel {
         cbRepuesto = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
         lbPrecioRepuesto = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        lbModelo = new javax.swing.JLabel();
+        lbMarca = new javax.swing.JLabel();
 
         jLabel2.setText("Elija la moto");
+
+        cbElejirMoto.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbElejirMotoItemStateChanged(evt);
+            }
+        });
 
         jLabel1.setText("Nombre del repuesto");
 
@@ -71,6 +86,14 @@ public class PanelRepuesto extends javax.swing.JPanel {
 
         lbPrecioRepuesto.setText("jLabel4");
 
+        jLabel4.setText("Marca");
+
+        jLabel6.setText("Modelo");
+
+        lbModelo.setText("jLabel8");
+
+        lbMarca.setText("jLabel7");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -78,33 +101,58 @@ public class PanelRepuesto extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(cbElejirMoto, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(cbRepuesto, javax.swing.GroupLayout.Alignment.LEADING, 0, 171, Short.MAX_VALUE))
                     .addComponent(jLabel1)
-                    .addComponent(jLabel2)
+                    .addComponent(jLabel2))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(cbElejirMoto, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(cbRepuesto, javax.swing.GroupLayout.Alignment.LEADING, 0, 171, Short.MAX_VALUE))
                         .addGap(34, 34, 34)
                         .addComponent(jLabel3)
                         .addGap(18, 18, 18)
-                        .addComponent(lbPrecioRepuesto)))
+                        .addComponent(lbPrecioRepuesto))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addGap(18, 18, 18)
+                                .addComponent(lbMarca))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel6)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(lbModelo)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(cbElejirMoto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(cbElejirMoto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(17, 17, 17)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel4)
+                                    .addComponent(lbMarca))
+                                .addGap(38, 38, 38))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel6)
+                                .addComponent(lbModelo)))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1)
                 .addGap(14, 14, 14)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cbRepuesto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3)
                     .addComponent(lbPrecioRepuesto))
-                .addContainerGap(172, Short.MAX_VALUE))
+                .addContainerGap(167, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -137,6 +185,45 @@ public class PanelRepuesto extends javax.swing.JPanel {
         //        servicioControl.cosultaPrecioServicio(lbPrecioServicio);
     }//GEN-LAST:event_cbRepuestoActionPerformed
 
+    private void cbElejirMotoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbElejirMotoItemStateChanged
+        // TODO add your handling code here:
+        if(evt.getStateChange() == ItemEvent.SELECTED){
+            Moto motoCon =(Moto) cbElejirMoto.getSelectedItem();
+            try {
+                PreparedStatement ps;
+                ResultSet rs;
+                Conexion conetar = new Conexion();
+                Connection con = conetar.conexion();
+                String sql = "select marca from moto where idmoto=" + motoCon.getIdMoto();
+                ps = con.prepareStatement(sql);
+                rs = ps.executeQuery();
+                while (rs.next()) {
+                    lbMarca.setText(rs.getString("marca"));
+
+                }
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(null, e.toString());
+            }
+            if (evt.getStateChange() == ItemEvent.SELECTED){
+                try {
+                PreparedStatement ps;
+                ResultSet rs;
+                Conexion conetar = new Conexion();
+                Connection con = conetar.conexion();
+                String sql = "select modelo from moto where idmoto=" + motoCon.getIdMoto();
+                ps = con.prepareStatement(sql);
+                rs = ps.executeQuery();
+                while (rs.next()) {
+                    lbModelo.setText(rs.getString("modelo"));
+
+                }
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(null, e.toString());
+            }
+            }
+        }
+    }//GEN-LAST:event_cbElejirMotoItemStateChanged
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> cbElejirMoto;
@@ -144,6 +231,10 @@ public class PanelRepuesto extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel lbMarca;
+    private javax.swing.JLabel lbModelo;
     private javax.swing.JLabel lbPrecioRepuesto;
     // End of variables declaration//GEN-END:variables
 }

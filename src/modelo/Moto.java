@@ -77,4 +77,7 @@ public class Moto {
         this.numeroChasis = numeroChasis;
     }
     
+    public String toString(){
+        return this.placa;
+    }
 }
