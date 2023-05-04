@@ -17,7 +17,8 @@ import modelo.Moto;
  * @author jhonb
  */
 public class VistaLogin extends javax.swing.JFrame {
-public static ArrayList<Cliente> user = new ArrayList<Cliente>();
+
+
     /**
      * Creates new form VistaLogin
      */
@@ -123,22 +124,24 @@ public static ArrayList<Cliente> user = new ArrayList<Cliente>();
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        String pass = String.valueOf(txtPass.getPassword());
-        String usuario = txtUse.getText();
         LoginController login = new LoginController();
-        if (txtUse.getText().equals("") || txtPass.getText().equals("")) {
-            JOptionPane.showMessageDialog(null, "FALTAN CAMPOS POR LLENAR");
+        Cliente mod = new Cliente();
 
-        } else {
-            if (login.Login(usuario, pass)) {
-                user=login.buscarDatosCliente(usuario);
-                VistaPrincipal principal = new VistaPrincipal();
-                principal.setVisible(true);
+        String pass = new String(txtPass.getPassword());
+        if (!txtUse.getText().equals("") && !pass.equals("")) {
+            mod.setUsuario(txtUse.getText());
+            mod.setPaswoord(pass);
+            if (login.Login(mod)) {
+                VistaPrincipal inicio= new VistaPrincipal(mod);
+                inicio.setVisible(true);
                 this.dispose();
-            } else {
-                JOptionPane.showMessageDialog(null, "Usuario y/o contraseña incorrecta.");
 
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "USUARIO/CONTASEÑA ICORRECOTS");
             }
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "FALTAN CAMPS POR LLENAR");
+
         }
 
 

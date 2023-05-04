@@ -9,24 +9,26 @@ package modelo;
  *
  * @author Mauricio
  */
-public class Moto {
+public class Moto{
     private int idMoto;
     private String placa;
     private String marca;
     private String modelo;
     private String kilometraje;
     private String numeroChasis;
+    private int idCliente;    
 
     public Moto(){
         
     }
-    public Moto(int idMoto, String placa, String marca, String modelo, String kilometraje, String numeroChasis) {
+    public Moto(int idMoto, String placa, String marca, String modelo, String kilometraje, String numeroChasis,int idCliente) {
         this.idMoto = idMoto;
         this.placa = placa;
         this.marca = marca;
         this.modelo = modelo;
         this.kilometraje = kilometraje;
         this.numeroChasis = numeroChasis;
+        this.idCliente=idCliente;
     }
 
     public int getIdMoto() {
@@ -76,6 +78,18 @@ public class Moto {
     public void setNumeroChasis(String numeroChasis) {
         this.numeroChasis = numeroChasis;
     }
+
+    public int getIdCliente() {
+        return idCliente;
+    }
+
+    public void setIdCliente(int idCliente) {
+        this.idCliente = idCliente;
+    }
+    
+
+    
+    
     
     public String toString(){
         return this.placa;

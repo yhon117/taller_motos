@@ -11,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
+import modelo.Cliente;
 import modelo.Moto;
 
 /**
@@ -27,45 +28,71 @@ public class MotoController {
             PreparedStatement ps;
             ResultSet rs;
 
-            String sql = "INSERT INTO moto(placa, marca, modelo, kilometraje, numeroChasis) VALUES(?,?,?,?,?)";
+            String sql = "INSERT INTO moto(placa, marca, modelo, kilometraje, numeroChasis, cliente_id_cliente) VALUES(?,?,?,?,?,?)";
             ps = con.prepareStatement(sql);
             ps.setString(1, moto.getPlaca());
             ps.setString(2, moto.getMarca());
             ps.setString(3, moto.getModelo());
             ps.setString(4, moto.getKilometraje());
             ps.setString(5, moto.getNumeroChasis());
+            ps.setInt(6,moto.getIdCliente());
             ps.executeUpdate();
             con.close();
             return true;
 
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e.toString());
-
+System.out.println(e);
+            JOptionPane.showMessageDialog(null, "ERROR");
         }
         return false;
 
     }
 
-    public boolean existePlaca(String placa) {
+    public int existePlaca(String placa) {
 
         try {
             Conexion conexion = new Conexion();
             Connection con = conexion.conexion();
             PreparedStatement ps;
             ResultSet rs;
-            String sql = "select * from moto where placa=?";
+            String sql = "select count(idmoto) from moto where placa=?";
             ps = con.prepareStatement(sql);
             ps.setString(1, placa);
-            rs = ps.executeQuery();
-            return rs.next();
+            rs=ps.executeQuery();
+            if(rs.next()){
+                return rs.getInt(1);
+            }
+            con.close(); 
+            return 0;
 
         } catch (SQLException e) {
             
-            JOptionPane.showMessageDialog(null, e.toString());
-
+System.out.println(e);
+            JOptionPane.showMessageDialog(null, "ERROR");
         }
-        return false;
+        return 0;
 
     }
+//        public boolean existePlaca(String placa) {
+//
+//        try {
+//            Conexion conexion = new Conexion();
+//            Connection con = conexion.conexion();
+//            PreparedStatement ps;
+//            ResultSet rs;
+//            String sql = "select * from moto where placa=?";
+//            ps = con.prepareStatement(sql);
+//            ps.setString(1, placa);
+//            rs = ps.executeQuery();
+//            return rs.next();
+//
+//        } catch (SQLException e) {
+//            
+//            JOptionPane.showMessageDialog(null, e.toString());
+//
+//        }
+//        return false;
+//
+//    }
 
 }

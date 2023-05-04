@@ -54,8 +54,8 @@ public class ServicioController {
             }
             rs.close();
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e.toString());
-        }
+System.out.println(e);
+            JOptionPane.showMessageDialog(null, "ERROR");        }
         return servicio;
     }
 
@@ -84,8 +84,8 @@ public class ServicioController {
             }
             rs.close();
         } catch (SQLException e) {
-           JOptionPane.showMessageDialog(null, e.toString());
-
+System.out.println(e);
+            JOptionPane.showMessageDialog(null, "ERROR");
         }
         return moto;
     }

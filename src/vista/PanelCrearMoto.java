@@ -5,8 +5,10 @@
  */
 package vista;
 
+import com.sun.xml.internal.bind.v2.model.core.ID;
 import controlador.MotoController;
 import javax.swing.JOptionPane;
+import modelo.Cliente;
 import modelo.Moto;
 
 /**
@@ -19,10 +21,19 @@ public class PanelCrearMoto extends javax.swing.JPanel {
      * Creates new form PanelCrearMoto
      */
         Moto moto = new Moto();
+            Cliente mod;
+
+
 
     public PanelCrearMoto() {
         initComponents();
+       
     }
+    public PanelCrearMoto(Cliente mod) {
+        initComponents();
+       this.mod=mod;
+    }
+// 
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -108,6 +119,9 @@ public class PanelCrearMoto extends javax.swing.JPanel {
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         // TODO add your handling code here:
           MotoController motoControl = new MotoController();
+          int idCliente = new Integer(mod.getIdCliente());
+
+           
         String placa = txtPlaca.getText();
         String marca = txtMarca.getText();
         String modelo = txtModelo.getText();
@@ -118,22 +132,21 @@ public class PanelCrearMoto extends javax.swing.JPanel {
         moto.setModelo(modelo);
         moto.setKilometraje(kilometraje);
         moto.setNumeroChasis(numeroChasis);
+        moto.setIdCliente(idCliente);
+        
 
         if (placa.equals("") || modelo.equals("") || marca.equals("") || kilometraje.equals("") || numeroChasis.equals("")) {
             JOptionPane.showMessageDialog(null, "FALTAN CAMPOS POR LLENAR");
-        } else {
-            if (motoControl.existePlaca(placa)) {
-                JOptionPane.showMessageDialog(null, "YA EXISTE ESTA PLACA");
-            } else {
-                if (placa.length() >6) {
-                    JOptionPane.showMessageDialog(null, "MAXIMO 6 CARACTERES EN LA PALCA");
+        } else if(motoControl.existePlaca(placa)!=0) {
+                     JOptionPane.showMessageDialog(null, "EXISTE PLACA");
 
-                } else {
-                    motoControl.insertarMoto(moto);
-                    JOptionPane.showMessageDialog(null, "se guardo los datos de la moto");
-                    eliminar();
-                }
-            }
+        }else if(placa.length()>6){
+             JOptionPane.showMessageDialog(null, "6 caracteres limite para la placa");
+
+        }else{
+            motoControl.insertarMoto(moto);
+            JOptionPane.showMessageDialog(null, "moto registrada");
+            eliminar();
         }   
     }//GEN-LAST:event_btnGuardarActionPerformed
 

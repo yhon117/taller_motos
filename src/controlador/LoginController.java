@@ -25,55 +25,72 @@ import vista.VistaPrincipal;
  */
 public class LoginController {
 
-    public boolean Login(String txtUse, String txtPass) {
+    public boolean Login(Cliente cliente) {
         try {
             ResultSet rs = null;
             PreparedStatement ps = null;
 
             Conexion conectar = new Conexion();
-            String consulta = "select * from cliente where cliente.usuario=(?) and cliente.contrasena=(?);";
+            String consulta = "select id_cliente, cedula, nombre, apellido, telefono, correo, usuario,contrasena, tipo_idtipo from cliente where usuario=(?) and contrasena=(?);";
             ps = conectar.conexion().prepareStatement(consulta);
 
-            
-            ps.setString(1, txtUse);
-            ps.setString(2, txtPass);
+             
+            ps.setString(1, cliente.getUsuario());
+            ps.setString(2, cliente.getPaswoord());
 
             rs = ps.executeQuery();
-            return rs.next();
+            
+            if(rs.next()){
+                cliente.setIdCliente(rs.getInt(1));
+                cliente.setCedula(rs.getString(2));
+                cliente.setNombre(rs.getString(3));
+                cliente.setApellido(rs.getString(4));
+                cliente.setTelefono(rs.getString(5));
+                cliente.setCorreo(rs.getString(6));
+                cliente.setIdTipo(rs.getInt(9));
+                  ps.close();
+            rs.close();
+                return true;
+
+            }else{
+                return false;
+            }            
 
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "ERROR:" + e);
+           System.out.println(e);
+            JOptionPane.showMessageDialog(null, "ERROR");
 
         }
 return false;
     }
 
-    public ArrayList buscarDatosCliente(String usuario) {
-        Conexion conexion = new Conexion();
-        Connection cn = conexion.conexion();
-        ArrayList<Cliente> lista = new ArrayList<Cliente>();
-        String buscar = "select cedula, nombre, apellido, telefono, correo, usuario,contrasena from cliente WHERE usuario = ?";
-        try {
-            PreparedStatement ps = cn.prepareStatement(buscar);
-            ps.setString(1, usuario);
-            ResultSet rs = ps.executeQuery();
-            if (rs.next()) {
-                Cliente cliente = new Cliente();
-                cliente.setCedula(rs.getString("cedula"));
-                cliente.setNombre(rs.getString("nombre"));
-                cliente.setApellido(rs.getString("apellido"));
-                cliente.setTelefono(rs.getString("telefono"));
-                cliente.setCorreo(rs.getString("correo"));
-                cliente.setUsuario(rs.getString("usuario"));
-                cliente.setPaswoord(rs.getString("contrasena"));
-                lista.add(cliente);
-            }
-            cn.close();
-
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "ERROR:" + e);
-
-        }
-        return lista;
-    }
+//    public ArrayList buscarDatosCliente(String usuario) {
+//        Conexion conexion = new Conexion();
+//        Connection cn = conexion.conexion();
+//        ArrayList<Cliente> lista = new ArrayList<Cliente>();
+//        String buscar = "select cedula, nombre, apellido, telefono, correo, usuario,contrasena, tipo_idtipo from cliente WHERE usuario = ?";
+//        try {
+//            PreparedStatement ps = cn.prepareStatement(buscar);
+//            ps.setString(1, usuario);
+//            ResultSet rs = ps.executeQuery();
+//            if (rs.next()) {
+//                Cliente cliente = new Cliente();
+//                cliente.setCedula(rs.getString("cedula"));
+//                cliente.setNombre(rs.getString("nombre"));
+//                cliente.setApellido(rs.getString("apellido"));
+//                cliente.setTelefono(rs.getString("telefono"));
+//                cliente.setCorreo(rs.getString("correo"));
+//                cliente.setUsuario(rs.getString("usuario"));
+//                cliente.setPaswoord(rs.getString("contrasena"));
+//                cliente.setIdTipo(rs.getInt(8));
+//                lista.add(cliente);
+//            }
+//            cn.close();
+//
+//        } catch (SQLException e) {
+//System.out.println(e);
+//            JOptionPane.showMessageDialog(null, "ERROR");
+//        }
+//        return lista;
+//    }
 }

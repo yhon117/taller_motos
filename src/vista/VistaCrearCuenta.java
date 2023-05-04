@@ -176,6 +176,7 @@ public class VistaCrearCuenta extends javax.swing.JFrame {
         cliente.setCorreo(correo);
         cliente.setUsuario(usuario);
         cliente.setPaswoord(paswoord);
+        cliente.setIdTipo(1);
 
         if (txtNombre.getText().equals("") || txtApellido.getText().equals("") || txtCedula.getText().equals("")
                 || txtCorreo.getText().equals("") || txtUseario.getText().equals("")
@@ -197,15 +198,16 @@ public class VistaCrearCuenta extends javax.swing.JFrame {
                     } else {
                         controlCliente.insertarCliente(cliente);
                         JOptionPane.showMessageDialog(null, "CUENTA CREADAD  ");
+                         VistaLogin login = new VistaLogin();
+           login.setVisible(true);
+           this.dispose();
                         
 
                     }
                 }
             }
         }
-           VistaLogin login = new VistaLogin();
-           login.setVisible(true);
-           this.dispose();
+          
     }//GEN-LAST:event_btnCrearCuentaActionPerformed
 
     public void eliminar() {

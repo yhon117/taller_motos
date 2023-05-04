@@ -47,8 +47,8 @@ public class RepuestoController {
             }
             rs.close();
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e.toString());
-        }
+System.out.println(e);
+            JOptionPane.showMessageDialog(null, "ERROR");        }
         return repuesto;
     }
     

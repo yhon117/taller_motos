@@ -6,6 +6,7 @@
 package vista;
 
 import java.awt.BorderLayout;
+import modelo.Cliente;
 
 /**
  *
@@ -13,22 +14,27 @@ import java.awt.BorderLayout;
  */
 public class VistaPrincipal extends javax.swing.JFrame {
 
-    VistaLogin login = new VistaLogin();
     /**
      * Creates new form VistaPrincipal
      */
+    Cliente mod;
     public VistaPrincipal() {
         initComponents();
                 this.setLocationRelativeTo(null);
-                validar(login);
         
     }
-    public void validar(VistaLogin lo){
-        VistaLogin aux=null;
-        for(int i=0; i<lo.user.size();i++){
-            lbNombre.setText(lo.user.get(i).getNombre());
-            lbApellido.setText(lo.user.get(i).getApellido());
-        }
+     public VistaPrincipal(Cliente mod) {
+        initComponents();
+                this.setLocationRelativeTo(null);
+                this.mod=mod;
+                lbApellido.setText(mod.getUsuario());
+                lbIdTipo.setText(Integer.toString(mod.getIdTipo()));
+                if(mod.getIdTipo()==1){
+                   menuReporte.setVisible(false);
+                }else if(mod.getIdTipo()==2){
+                    
+                }
+        
     }
 
     /**
@@ -45,13 +51,14 @@ public class VistaPrincipal extends javax.swing.JFrame {
         btnServicios = new javax.swing.JButton();
         btnRepuesto = new javax.swing.JButton();
         escritorio = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        lbNombre = new javax.swing.JLabel();
         lbApellido = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        lbIdTipo = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         mnCerar = new javax.swing.JMenuItem();
+        menuReporte = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -116,13 +123,13 @@ public class VistaPrincipal extends javax.swing.JFrame {
             .addGap(0, 536, Short.MAX_VALUE)
         );
 
-        jLabel1.setText("Nombre");
-
-        jLabel2.setText("Apellido");
-
-        lbNombre.setText("jLabel3");
+        jLabel2.setText("Usuario");
 
         lbApellido.setText("jLabel4");
+
+        jLabel1.setText("tipo");
+
+        lbIdTipo.setText("jLabel3");
 
         jMenu1.setText("Salir");
 
@@ -136,6 +143,9 @@ public class VistaPrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
 
+        menuReporte.setText("Repoerte");
+        jMenuBar1.add(menuReporte);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -147,13 +157,13 @@ public class VistaPrincipal extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lbNombre))
-                    .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lbApellido)))
+                        .addComponent(lbApellido))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lbIdTipo)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(escritorio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -163,11 +173,11 @@ public class VistaPrincipal extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(escritorio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
+                        .addGap(12, 12, 12)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
-                            .addComponent(lbNombre))
-                        .addGap(18, 18, 18)
+                            .addComponent(lbIdTipo))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
                             .addComponent(lbApellido))
@@ -181,7 +191,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
 
     private void btnRejistrarMotoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRejistrarMotoActionPerformed
         // TODO add your handling code here:
-        PanelCrearMoto panelMoto = new PanelCrearMoto();
+        PanelCrearMoto panelMoto = new PanelCrearMoto(mod);
         panelMoto.setSize(500,530);
         panelMoto.setLocation(0,0);
         escritorio.removeAll();
@@ -265,7 +275,8 @@ public class VistaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lbApellido;
-    private javax.swing.JLabel lbNombre;
+    private javax.swing.JLabel lbIdTipo;
+    private javax.swing.JMenu menuReporte;
     private javax.swing.JMenuItem mnCerar;
     // End of variables declaration//GEN-END:variables
 }
