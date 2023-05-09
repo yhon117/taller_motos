@@ -27,8 +27,8 @@ import modelo.Servicio;
  */
 public class ServicioController {
 
-  public Vector<Servicio> nombreServicio() {
-        String sql = "select * from servicios";
+    public Vector<Servicio> nombreServicio() {
+        String sql = "select * from servicios where id_srevicio !=99";
         Conexion conexion = new Conexion();
 
         PreparedStatement ps;
@@ -54,43 +54,44 @@ public class ServicioController {
             }
             rs.close();
         } catch (SQLException e) {
-System.out.println(e);
-            JOptionPane.showMessageDialog(null, "ERROR");        }
+            System.out.println(e);
+            JOptionPane.showMessageDialog(null, "ERROR");
+        }
         return servicio;
     }
 
-    public Vector<Moto> nombreMoto(){
-        String sql="select*from moto";
+    public Vector<Moto> nombreMoto(int id) {
+        String sql = "select*from moto where cliente_id_cliente=?";
         Conexion conexion = new Conexion();
         PreparedStatement ps;
         ResultSet rs;
         Vector<Moto> moto = new Vector<>();
-        Moto mot=null;
+        Moto mot = null;
         try {
             Connection con = conexion.conexion();
-            ps=con.prepareStatement(sql);
-            rs=ps.executeQuery();
+            ps = con.prepareStatement(sql);
             
+
             mot = new Moto();
             mot.setIdMoto(0);
+            ps.setInt(1, id);
             mot.setPlaca("selecione una placa");
             moto.add(mot);
-            
-            while(rs.next()){
-                mot=new Moto();
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                mot = new Moto();
                 mot.setIdMoto(rs.getInt("idmoto"));
                 mot.setPlaca(rs.getString("placa"));
+                mot.setIdCliente(rs.getInt("cliente_id_cliente"));
+
                 moto.add(mot);
             }
             rs.close();
         } catch (SQLException e) {
-System.out.println(e);
+            System.out.println(e);
             JOptionPane.showMessageDialog(null, "ERROR");
         }
         return moto;
     }
-    
-
- 
 
 }

@@ -8,6 +8,7 @@ package vista;
 import conexion.Conexion;
 import controlador.RepuestoController;
 import controlador.ServicioController;
+import controlador.VentaController;
 import java.awt.event.ItemEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -16,8 +17,10 @@ import java.sql.SQLException;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import modelo.Cliente;
 import modelo.Moto;
 import modelo.Repuesto;
+import modelo.Venta;
 
 /**
  *
@@ -31,16 +34,28 @@ public class PanelRepuesto extends javax.swing.JPanel {
     Repuesto repuesto = new Repuesto();
     ServicioController servicioCon = new ServicioController();
     RepuestoController repuestoCon = new RepuestoController();
+        Venta venta = new Venta();
+            VentaController ventaControl = new VentaController();
+
+
+    Cliente mod;
     public PanelRepuesto() {
         initComponents();
-        lbPrecioRepuesto.setText("");
-        //servicioCon.cosultaMotoServicio(cbElejirMoto);
-        DefaultComboBoxModel mostrarNombre = new DefaultComboBoxModel(repuestoCon.nombreRepuesto());
-        cbRepuesto.setModel(mostrarNombre);
-         DefaultComboBoxModel mostrarPlaca = new DefaultComboBoxModel(servicioCon.nombreMoto());
-        cbElejirMoto.setModel(mostrarPlaca);
+
     }
 
+       public PanelRepuesto(Cliente mod) {
+        initComponents();
+        lbPrecioRepuesto.setText("");
+          lbMarca.setText("");
+        lbModelo.setText("");
+        this.mod=mod;
+        int idCliente = new Integer(mod.getIdCliente());
+        DefaultComboBoxModel mostrarNombre = new DefaultComboBoxModel(repuestoCon.nombreRepuesto());
+        cbRepuesto.setModel(mostrarNombre);
+         DefaultComboBoxModel mostrarPlaca = new DefaultComboBoxModel(servicioCon.nombreMoto(idCliente));
+        cbElejirMoto.setModel(mostrarPlaca);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -60,6 +75,9 @@ public class PanelRepuesto extends javax.swing.JPanel {
         jLabel6 = new javax.swing.JLabel();
         lbModelo = new javax.swing.JLabel();
         lbMarca = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        btnPagar = new javax.swing.JButton();
 
         jLabel2.setText("Elija la moto");
 
@@ -94,6 +112,26 @@ public class PanelRepuesto extends javax.swing.JPanel {
 
         lbMarca.setText("jLabel7");
 
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
+
+        btnPagar.setText("Pagar");
+        btnPagar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPagarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -101,29 +139,35 @@ public class PanelRepuesto extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(cbElejirMoto, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(cbRepuesto, javax.swing.GroupLayout.Alignment.LEADING, 0, 171, Short.MAX_VALUE))
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(34, 34, 34)
-                        .addComponent(jLabel3)
-                        .addGap(18, 18, 18)
-                        .addComponent(lbPrecioRepuesto))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(cbElejirMoto, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(cbRepuesto, javax.swing.GroupLayout.Alignment.LEADING, 0, 171, Short.MAX_VALUE))
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel4)
+                                .addGap(34, 34, 34)
+                                .addComponent(jLabel3)
                                 .addGap(18, 18, 18)
-                                .addComponent(lbMarca))
+                                .addComponent(lbPrecioRepuesto))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel6)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(lbModelo)))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel4)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(lbMarca))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel6)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(lbModelo))))))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 381, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(63, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(btnPagar)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -152,7 +196,11 @@ public class PanelRepuesto extends javax.swing.JPanel {
                     .addComponent(cbRepuesto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3)
                     .addComponent(lbPrecioRepuesto))
-                .addContainerGap(167, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnPagar)
+                .addContainerGap(39, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -177,6 +225,12 @@ public class PanelRepuesto extends javax.swing.JPanel {
             }
        
         }
+         String valorSeleccionadoSer = cbRepuesto.getSelectedItem().toString();
+             if(valorSeleccionadoSer.equals("seleciona un repuesto")){
+          
+            lbPrecioRepuesto.setText("");
+           
+        }
     }//GEN-LAST:event_cbRepuestoItemStateChanged
 
     private void cbRepuestoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbRepuestoActionPerformed
@@ -187,6 +241,8 @@ public class PanelRepuesto extends javax.swing.JPanel {
 
     private void cbElejirMotoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbElejirMotoItemStateChanged
         // TODO add your handling code here:
+        
+        
         if(evt.getStateChange() == ItemEvent.SELECTED){
             Moto motoCon =(Moto) cbElejirMoto.getSelectedItem();
             try {
@@ -222,10 +278,47 @@ public class PanelRepuesto extends javax.swing.JPanel {
             }
             }
         }
+           String valorSeleccionadoMot = cbElejirMoto.getSelectedItem().toString();
+             if(valorSeleccionadoMot.equals("selecione una placa")){
+            lbMarca.setText("");
+            lbModelo.setText("");
+           
+        }
     }//GEN-LAST:event_cbElejirMotoItemStateChanged
+
+    private void btnPagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPagarActionPerformed
+        // TODO add your handling code here:
+
+        Moto motoConn = (Moto) cbElejirMoto.getSelectedItem();
+
+        String valorSeleccionadoMot = cbElejirMoto.getSelectedItem().toString();
+        String valorSeleccionadoSer = cbRepuesto.getSelectedItem().toString();
+
+        if(valorSeleccionadoMot.equals("selecione una placa")){
+            JOptionPane.showMessageDialog(null, "selecione una placa");
+        }else if(valorSeleccionadoSer.equals("seleciona un servicio")){
+            JOptionPane.showMessageDialog(null, "selecione el servicio");
+
+        }else{
+            venta.setIdMoto(motoConn.getIdMoto());
+            venta.setIdServicio(99);
+            venta.setIdRepuesto(cbRepuesto.getSelectedIndex());
+
+            ventaControl.vebntaServicio(venta);
+            JOptionPane.showMessageDialog(null, "se realizo el repuesto ala moto");
+            //tabla();
+            cbElejirMoto.setSelectedIndex(0);
+            cbRepuesto.setSelectedIndex(0);
+            lbMarca.setText("");
+            lbModelo.setText("");
+            lbPrecioRepuesto.setText("");
+
+        }
+    }//GEN-LAST:event_btnPagarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnPagar;
     private javax.swing.JComboBox<String> cbElejirMoto;
     private javax.swing.JComboBox<String> cbRepuesto;
     private javax.swing.JLabel jLabel1;
@@ -233,6 +326,8 @@ public class PanelRepuesto extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lbMarca;
     private javax.swing.JLabel lbModelo;
     private javax.swing.JLabel lbPrecioRepuesto;

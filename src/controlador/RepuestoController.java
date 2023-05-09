@@ -21,7 +21,7 @@ import modelo.Repuesto;
 public class RepuestoController {
     
      public Vector<Repuesto> nombreRepuesto() {
-        String sql = "select * from repuesto";
+        String sql = "select * from repuesto where idrepuesto !=99";
         Conexion conexion = new Conexion();
 
         PreparedStatement ps;

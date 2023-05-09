@@ -28,7 +28,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
                 this.setLocationRelativeTo(null);
                 this.mod=mod;
                 lbApellido.setText(mod.getUsuario());
-                lbIdTipo.setText(Integer.toString(mod.getIdTipo()));
+              
                 if(mod.getIdTipo()==1){
                    menuReporte.setVisible(false);
                 }else if(mod.getIdTipo()==2){
@@ -53,8 +53,6 @@ public class VistaPrincipal extends javax.swing.JFrame {
         escritorio = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         lbApellido = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        lbIdTipo = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         mnCerar = new javax.swing.JMenuItem();
@@ -116,7 +114,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
         escritorio.setLayout(escritorioLayout);
         escritorioLayout.setHorizontalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 498, Short.MAX_VALUE)
+            .addGap(0, 588, Short.MAX_VALUE)
         );
         escritorioLayout.setVerticalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -126,10 +124,6 @@ public class VistaPrincipal extends javax.swing.JFrame {
         jLabel2.setText("Usuario");
 
         lbApellido.setText("jLabel4");
-
-        jLabel1.setText("tipo");
-
-        lbIdTipo.setText("jLabel3");
 
         jMenu1.setText("Salir");
 
@@ -159,11 +153,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lbApellido))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lbIdTipo)))
+                        .addComponent(lbApellido)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(escritorio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -173,11 +163,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(escritorio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(12, 12, 12)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(lbIdTipo))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(40, 40, 40)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
                             .addComponent(lbApellido))
@@ -202,8 +188,8 @@ public class VistaPrincipal extends javax.swing.JFrame {
 
     private void btnServiciosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnServiciosActionPerformed
         // TODO add your handling code here:
-       PanelServicios panelServicios = new PanelServicios();
-       panelServicios.setSize(500,500);
+       PanelServicios panelServicios = new PanelServicios(mod);
+       panelServicios.setSize(590,540);
        panelServicios.setLocation(0,0);
         escritorio.removeAll();
         escritorio.add(panelServicios,BorderLayout.CENTER);
@@ -213,7 +199,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
 
     private void btnRepuestoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRepuestoActionPerformed
         // TODO add your handling code here:
-          PanelRepuesto panelRepuesto = new PanelRepuesto();
+          PanelRepuesto panelRepuesto = new PanelRepuesto(mod);
        panelRepuesto.setSize(500,500);
        panelRepuesto.setLocation(0,0);
         escritorio.removeAll();
@@ -269,13 +255,11 @@ public class VistaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnRepuesto;
     private javax.swing.JButton btnServicios;
     private javax.swing.JPanel escritorio;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lbApellido;
-    private javax.swing.JLabel lbIdTipo;
     private javax.swing.JMenu menuReporte;
     private javax.swing.JMenuItem mnCerar;
     // End of variables declaration//GEN-END:variables
