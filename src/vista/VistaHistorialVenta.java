@@ -6,11 +6,13 @@
 package vista;
 
 import conexion.Conexion;
+import controlador.ServicioController;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.Cliente;
@@ -24,6 +26,9 @@ public class VistaHistorialVenta extends javax.swing.JFrame {
     /**
      * Creates new form VistaHistorialVenta
      */
+    
+        ServicioController servicioCon = new ServicioController();
+
     Cliente mod;
 
     public VistaHistorialVenta() {
@@ -37,6 +42,8 @@ public class VistaHistorialVenta extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         lbTotalServicio.setText("");
         lbTotalRepuesto.setText("");
+        DefaultComboBoxModel mostrarNombre = new DefaultComboBoxModel(servicioCon.nombreServicio());
+        cbServicio.setModel(mostrarNombre);
 
     }
 
@@ -49,16 +56,15 @@ public class VistaHistorialVenta extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        bgServicio = new javax.swing.ButtonGroup();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaRepuesto = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
         tablaServicio = new javax.swing.JTable();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
-        jRadioButton3 = new javax.swing.JRadioButton();
-        jRadioButton4 = new javax.swing.JRadioButton();
+        rbServicioVendido = new javax.swing.JRadioButton();
+        rbServioMenosVendido = new javax.swing.JRadioButton();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnBuscar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         lbAdmin = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -71,6 +77,7 @@ public class VistaHistorialVenta extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         lbTotalRepuesto = new javax.swing.JLabel();
+        cbServicio = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -100,13 +107,11 @@ public class VistaHistorialVenta extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(tablaServicio);
 
-        jRadioButton1.setText("jRadioButton1");
+        bgServicio.add(rbServicioVendido);
+        rbServicioVendido.setText("servicio mas vendido");
 
-        jRadioButton2.setText("jRadioButton2");
-
-        jRadioButton3.setText("jRadioButton3");
-
-        jRadioButton4.setText("jRadioButton4");
+        bgServicio.add(rbServioMenosVendido);
+        rbServioMenosVendido.setText("servicio menos vendido");
 
         jButton1.setText("todos los servicios ");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -115,7 +120,12 @@ public class VistaHistorialVenta extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("jButton2");
+        btnBuscar.setText("Buscar");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Administrador");
 
@@ -146,6 +156,8 @@ public class VistaHistorialVenta extends javax.swing.JFrame {
 
         lbTotalRepuesto.setText("jLabel4");
 
+        cbServicio.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -158,7 +170,7 @@ public class VistaHistorialVenta extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jButton1)
                                 .addGap(18, 18, 18)
-                                .addComponent(jButton2))
+                                .addComponent(btnBuscar))
                             .addComponent(jRadioButton5)
                             .addComponent(jRadioButton6)
                             .addComponent(jRadioButton7)
@@ -167,7 +179,7 @@ public class VistaHistorialVenta extends javax.swing.JFrame {
                                 .addComponent(jButton3)
                                 .addGap(18, 18, 18)
                                 .addComponent(jButton4)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 756, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
@@ -179,15 +191,14 @@ public class VistaHistorialVenta extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(lbTotalRepuesto))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jRadioButton1)
-                            .addComponent(jRadioButton2)
-                            .addComponent(jRadioButton3)
-                            .addComponent(jRadioButton4)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(rbServicioVendido)
+                            .addComponent(rbServioMenosVendido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(lbAdmin)))
+                                .addComponent(lbAdmin))
+                            .addComponent(cbServicio, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -204,26 +215,24 @@ public class VistaHistorialVenta extends javax.swing.JFrame {
                     .addComponent(jLabel1)
                     .addComponent(lbAdmin))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jRadioButton1)
+                .addComponent(rbServicioVendido)
                 .addGap(18, 18, 18)
-                .addComponent(jRadioButton2)
-                .addGap(18, 18, 18)
-                .addComponent(jRadioButton3)
-                .addGap(18, 18, 18)
-                .addComponent(jRadioButton4)
+                .addComponent(rbServioMenosVendido)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
                             .addComponent(lbTotalServicio))
                         .addGap(43, 43, 43))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
+                        .addComponent(cbServicio, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(58, 58, 58)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButton1)
-                            .addComponent(jButton2))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(btnBuscar))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
@@ -255,7 +264,7 @@ public class VistaHistorialVenta extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        
+
         double total = 0;
         try {
             DefaultTableModel model = new DefaultTableModel();
@@ -330,6 +339,137 @@ public class VistaHistorialVenta extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        // TODO add your handling code here:
+        filtro();
+        filtroCombo();
+    }//GEN-LAST:event_btnBuscarActionPerformed
+
+    public void filtro() {
+
+        try {
+            if (!rbServicioVendido.isSelected() && !rbServioMenosVendido.isSelected()) {
+                JOptionPane.showMessageDialog(rootPane, "elija una opcion");
+            } else {
+                if (rbServicioVendido.isSelected()) {
+                    try {
+                        DefaultTableModel model = new DefaultTableModel();
+                        tablaServicio.setModel(model);
+                        Conexion conetar = new Conexion();
+                        Connection con = conetar.conexion();
+                        PreparedStatement ps = con.prepareStatement("call serviciomasvendido()");
+                        ResultSet rs = ps.executeQuery();
+                        ResultSetMetaData metaData = ps.getMetaData();
+
+                        for (int i = 1; i <= metaData.getColumnCount(); i++) {
+                            model.addColumn(metaData.getColumnLabel(i));
+                        }
+                        while (rs.next()) {
+
+                            Object[] filas = new Object[metaData.getColumnCount()];
+                            for (int i = 0; i < metaData.getColumnCount(); i++) {
+                                filas[i] = rs.getObject(i + 1);
+
+                            }
+                            model.addRow(filas);
+                        }
+
+                        ps.close();
+                        ps.close();
+                        con.close();
+                        lbTotalServicio.setText("");
+
+                    } catch (SQLException e) {
+                        System.out.println(e);
+                        JOptionPane.showMessageDialog(null, "ERROR");
+                    }
+                }
+
+                if (rbServioMenosVendido.isSelected()) {
+                    try {
+                        DefaultTableModel model = new DefaultTableModel();
+                        tablaServicio.setModel(model);
+                        Conexion conetar = new Conexion();
+                        Connection con = conetar.conexion();
+                        PreparedStatement ps = con.prepareStatement("call serviciomenosvendido()");
+                        ResultSet rs = ps.executeQuery();
+                        ResultSetMetaData metaData = ps.getMetaData();
+
+                        for (int i = 1; i <= metaData.getColumnCount(); i++) {
+                            model.addColumn(metaData.getColumnLabel(i));
+                        }
+                        while (rs.next()) {
+
+                            Object[] filas = new Object[metaData.getColumnCount()];
+                            for (int i = 0; i < metaData.getColumnCount(); i++) {
+                                filas[i] = rs.getObject(i + 1);
+
+                            }
+                            model.addRow(filas);
+                        }
+
+                        ps.close();
+                        ps.close();
+                        con.close();
+                        lbTotalServicio.setText("");
+
+                    } catch (SQLException e) {
+                        System.out.println(e);
+                        JOptionPane.showMessageDialog(null, "ERROR");
+                    }
+                }
+            }
+            
+          
+        } catch (Exception e) {
+        }
+    }
+    
+    public void filtroCombo(){
+        
+               String valorSeleccionadoSer = cbServicio.getSelectedItem().toString();
+
+        try {
+              if(valorSeleccionadoSer.equals("seleciona un servicio")){
+
+              JOptionPane.showMessageDialog(null, "selecione el servicio");
+            }else{
+                try {
+            DefaultTableModel model = new DefaultTableModel();
+            tablaServicio.setModel(model);
+            Conexion conetar = new Conexion();
+            Connection con = conetar.conexion();
+            PreparedStatement ps = con.prepareStatement("call reporteservicioid(?)");
+            ps.setInt(1, cbServicio.getSelectedIndex());
+            ResultSet rs = ps.executeQuery();
+            ResultSetMetaData metaData = ps.getMetaData();
+
+            for (int i = 1; i <= metaData.getColumnCount(); i++) {
+                model.addColumn(metaData.getColumnLabel(i));
+            }
+            while (rs.next()) {
+
+                Object[] filas = new Object[metaData.getColumnCount()];
+                for (int i = 0; i < metaData.getColumnCount(); i++) {
+                    filas[i] = rs.getObject(i + 1);
+                   
+                }
+                model.addRow(filas);
+            }
+
+            ps.close();
+            ps.close();
+            con.close();
+
+        } catch (SQLException e) {
+            System.out.println(e);
+            JOptionPane.showMessageDialog(null, "ERROR");
+        }
+            }
+        } catch (Exception e) {
+        }
+    }
+
     /**
      * @param args the command line arguments
      */
@@ -366,17 +506,15 @@ public class VistaHistorialVenta extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup bgServicio;
+    private javax.swing.JButton btnBuscar;
+    private javax.swing.JComboBox<String> cbServicio;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JRadioButton jRadioButton3;
-    private javax.swing.JRadioButton jRadioButton4;
     private javax.swing.JRadioButton jRadioButton5;
     private javax.swing.JRadioButton jRadioButton6;
     private javax.swing.JRadioButton jRadioButton7;
@@ -386,6 +524,8 @@ public class VistaHistorialVenta extends javax.swing.JFrame {
     private javax.swing.JLabel lbAdmin;
     private javax.swing.JLabel lbTotalRepuesto;
     private javax.swing.JLabel lbTotalServicio;
+    private javax.swing.JRadioButton rbServicioVendido;
+    private javax.swing.JRadioButton rbServioMenosVendido;
     private javax.swing.JTable tablaRepuesto;
     private javax.swing.JTable tablaServicio;
     // End of variables declaration//GEN-END:variables
