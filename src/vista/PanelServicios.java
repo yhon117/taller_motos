@@ -12,8 +12,8 @@ import java.awt.event.ItemEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -32,29 +32,44 @@ public class PanelServicios extends javax.swing.JPanel {
      * Creates new form PanelServicios
      */
     Moto moto = new Moto();
+
     Servicio servicio = new Servicio();
+
     ServicioController servicioControl = new ServicioController();
+
     VentaController ventaControl = new VentaController();
+
     Venta venta = new Venta();
 
     Cliente mod;
 
     public PanelServicios() {
         initComponents();
-
     }
 
     public PanelServicios(Cliente mod) {
+
         initComponents();
+
         this.mod = mod;
+
         lbPrecioServicio.setText("");
+
         lbMarca.setText("");
+
         lbModelo.setText("");
+        lbTotal.setText("");
+
         int idCliente = new Integer(mod.getIdCliente());
+
         DefaultComboBoxModel mostrarNombre = new DefaultComboBoxModel(servicioControl.nombreServicio());
+
         cbServicios.setModel(mostrarNombre);
+
         DefaultComboBoxModel mostrarPlaca = new DefaultComboBoxModel(servicioControl.nombreMoto(idCliente));
+
         cbElejirMoto.setModel(mostrarPlaca);
+
         txtArea.setEditable(false);
 
     }
@@ -68,28 +83,44 @@ public class PanelServicios extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        cbServicios = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        lbMarca = new javax.swing.JLabel();
         cbElejirMoto = new javax.swing.JComboBox<>();
+        jLabel6 = new javax.swing.JLabel();
+        lbModelo = new javax.swing.JLabel();
+        cbServicios = new javax.swing.JComboBox<>();
+        jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         lbPrecioServicio = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtArea = new javax.swing.JTextArea();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        lbMarca = new javax.swing.JLabel();
-        lbModelo = new javax.swing.JLabel();
-        btnPagar = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         tablaServicio = new javax.swing.JTable();
+        btnPagar = new javax.swing.JButton();
+        btnTabla = new javax.swing.JButton();
+        btnFactura = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
+        lbTotal = new javax.swing.JLabel();
 
-        setBorder(javax.swing.BorderFactory.createTitledBorder("Servicios"));
-        setToolTipText("");
-        setName(""); // NOI18N
+        setPreferredSize(new java.awt.Dimension(559, 536));
 
-        jLabel1.setText("Nombre del servicios");
+        jLabel2.setText("Elija la moto");
+
+        jLabel4.setText("Marca");
+
+        lbMarca.setText("jLabel7");
+
+        cbElejirMoto.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbElejirMotoItemStateChanged(evt);
+            }
+        });
+
+        jLabel6.setText("Modelo");
+
+        lbModelo.setText("jLabel8");
 
         cbServicios.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -102,38 +133,17 @@ public class PanelServicios extends javax.swing.JPanel {
             }
         });
 
-        jLabel2.setText("Elija la moto");
-
-        cbElejirMoto.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                cbElejirMotoItemStateChanged(evt);
-            }
-        });
+        jLabel1.setText("Nombre del servicios");
 
         jLabel3.setText("VALOR DEL SERVICIO");
 
         lbPrecioServicio.setText("jLabel4");
 
+        jLabel5.setText("Descripcion del servicio");
+
         txtArea.setColumns(20);
         txtArea.setRows(5);
         jScrollPane1.setViewportView(txtArea);
-
-        jLabel5.setText("Descripcion del servicio");
-
-        jLabel4.setText("Marca");
-
-        jLabel6.setText("Modelo");
-
-        lbMarca.setText("jLabel7");
-
-        lbModelo.setText("jLabel8");
-
-        btnPagar.setText("Pagar");
-        btnPagar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPagarActionPerformed(evt);
-            }
-        });
 
         tablaServicio.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -143,10 +153,35 @@ public class PanelServicios extends javax.swing.JPanel {
                 {null, null, null, null, null}
             },
             new String [] {
-                "Placa", "Maca", "Modelo", "Servicio", "Precio"
+                "", "", "", "", ""
             }
         ));
         jScrollPane3.setViewportView(tablaServicio);
+
+        btnPagar.setText("Pagar");
+        btnPagar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPagarActionPerformed(evt);
+            }
+        });
+
+        btnTabla.setText("historial ventas");
+        btnTabla.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTablaActionPerformed(evt);
+            }
+        });
+
+        btnFactura.setText("Factura");
+        btnFactura.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFacturaActionPerformed(evt);
+            }
+        });
+
+        jLabel7.setText("TOTAL");
+
+        lbTotal.setText("jLabel7");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -155,32 +190,47 @@ public class PanelServicios extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel5)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(cbElejirMoto, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(cbServicios, javax.swing.GroupLayout.Alignment.LEADING, 0, 171, Short.MAX_VALUE))
-                            .addComponent(jLabel2))
-                        .addGap(34, 34, 34)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 547, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addGap(18, 18, 18)
-                                .addComponent(lbMarca))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addGap(18, 18, 18)
-                                .addComponent(lbPrecioServicio))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel6)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(lbModelo))))
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnPagar))
-                .addContainerGap(68, Short.MAX_VALUE))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel1)
+                                    .addComponent(jLabel5)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                                .addComponent(cbElejirMoto, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(cbServicios, javax.swing.GroupLayout.Alignment.LEADING, 0, 171, Short.MAX_VALUE))
+                                            .addComponent(jLabel2))
+                                        .addGap(34, 34, 34)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(jLabel4)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(lbMarca))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(jLabel3)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(lbPrecioServicio))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(jLabel6)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(lbModelo)))))
+                                .addGap(0, 161, Short.MAX_VALUE)))
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnPagar)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnTabla)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnFactura)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lbTotal)
+                        .addGap(106, 106, 106))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -211,174 +261,320 @@ public class PanelServicios extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btnPagar)
-                .addContainerGap(43, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnPagar)
+                    .addComponent(btnTabla)
+                    .addComponent(lbTotal)
+                    .addComponent(btnFactura)
+                    .addComponent(jLabel7))
+                .addContainerGap(66, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void cbServiciosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbServiciosActionPerformed
-        // TODO add your handling code here:
-
-    }//GEN-LAST:event_cbServiciosActionPerformed
-
-    private void cbServiciosItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbServiciosItemStateChanged
-        // TODO add your handling code here:
-
-      
-        
-       
-
-        if (evt.getStateChange() == ItemEvent.SELECTED) {
-            Servicio servicioCon = (Servicio) cbServicios.getSelectedItem();
-            try {
-                PreparedStatement ps;
-                ResultSet rs;
-                Conexion conetar = new Conexion();
-                Connection con = conetar.conexion();
-                String sql = "select precio from servicios where id_srevicio=" + servicioCon.getIdServicio();
-                ps = con.prepareStatement(sql);
-                rs = ps.executeQuery();
-                while (rs.next()) {
-                    lbPrecioServicio.setText(rs.getString("precio"));
-
-                }
-            } catch (SQLException e) {
-                JOptionPane.showMessageDialog(null, e.toString());
-            }
-            if (evt.getStateChange() == ItemEvent.SELECTED) {
-                try {
-                    PreparedStatement ps;
-                    ResultSet rs;
-                    Conexion conetar = new Conexion();
-                    Connection con = conetar.conexion();
-                    String sql = "select descripcion from servicios where id_srevicio=" + servicioCon.getIdServicio();
-                    ps = con.prepareStatement(sql);
-                    rs = ps.executeQuery();
-                    while (rs.next()) {
-                        txtArea.setText(rs.getString("descripcion"));
-
-                    }
-                } catch (SQLException e) {
-                    JOptionPane.showMessageDialog(null, e.toString());
-                }
-            }
-            
-          
-        }
-        String valorSeleccionadoSer = cbServicios.getSelectedItem().toString();
-             if(valorSeleccionadoSer.equals("seleciona un servicio")){
-          
-            lbPrecioServicio.setText("");
-            txtArea.setText("");
-        }
-    }//GEN-LAST:event_cbServiciosItemStateChanged
-
     private void cbElejirMotoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbElejirMotoItemStateChanged
         // TODO add your handling code here:
+
         if (evt.getStateChange() == ItemEvent.SELECTED) {
+
             Moto motoCon = (Moto) cbElejirMoto.getSelectedItem();
+
             try {
+
                 PreparedStatement ps;
+
                 ResultSet rs;
+
                 Conexion conetar = new Conexion();
+
                 Connection con = conetar.conexion();
+
                 String sql = "select marca from moto where idmoto=" + motoCon.getIdMoto();
+
                 ps = con.prepareStatement(sql);
+
                 rs = ps.executeQuery();
+
                 while (rs.next()) {
+
                     lbMarca.setText(rs.getString("marca"));
 
                 }
+
             } catch (SQLException e) {
+
                 JOptionPane.showMessageDialog(null, e.toString());
+
             }
+
             if (evt.getStateChange() == ItemEvent.SELECTED) {
+
                 try {
+
                     PreparedStatement ps;
+
                     ResultSet rs;
+
                     Conexion conetar = new Conexion();
+
                     Connection con = conetar.conexion();
+
                     String sql = "select modelo from moto where idmoto=" + motoCon.getIdMoto();
+
                     ps = con.prepareStatement(sql);
+
                     rs = ps.executeQuery();
+
                     while (rs.next()) {
+
                         lbModelo.setText(rs.getString("modelo"));
 
                     }
+
                 } catch (SQLException e) {
+
                     JOptionPane.showMessageDialog(null, e.toString());
+
                 }
+
             }
+
         }
-        
-           String valorSeleccionadoMot = cbElejirMoto.getSelectedItem().toString();
-             if(valorSeleccionadoMot.equals("selecione una placa")){
+
+        String valorSeleccionadoMot = cbElejirMoto.getSelectedItem().toString();
+
+        if (valorSeleccionadoMot.equals("selecione una placa")) {
+
             lbMarca.setText("");
+
             lbModelo.setText("");
-           
+
         }
     }//GEN-LAST:event_cbElejirMotoItemStateChanged
 
+    private void cbServiciosItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbServiciosItemStateChanged
+        // TODO add your handling code here:
+        
+        if (evt.getStateChange() == ItemEvent.SELECTED) {
+
+            Servicio servicioCon = (Servicio) cbServicios.getSelectedItem();
+
+            try {
+
+                PreparedStatement ps;
+
+                ResultSet rs;
+
+                Conexion conetar = new Conexion();
+
+                Connection con = conetar.conexion();
+
+                String sql = "select precio from servicios where id_srevicio=" + servicioCon.getIdServicio();
+
+                ps = con.prepareStatement(sql);
+
+                rs = ps.executeQuery();
+
+                while (rs.next()) {
+
+                    lbPrecioServicio.setText(rs.getString("precio"));
+
+
+
+                }
+
+            } catch (SQLException e) {
+
+                JOptionPane.showMessageDialog(null, e.toString());
+
+            }
+
+            if (evt.getStateChange() == ItemEvent.SELECTED) {
+
+                try {
+
+                    PreparedStatement ps;
+
+                    ResultSet rs;
+
+                    Conexion conetar = new Conexion();
+
+                    Connection con = conetar.conexion();
+
+                    String sql = "select descripcion from servicios where id_srevicio=" + servicioCon.getIdServicio();
+
+                    ps = con.prepareStatement(sql);
+
+                    rs = ps.executeQuery();
+
+                    while (rs.next()) {
+
+                        txtArea.setText(rs.getString("descripcion"));
+
+
+
+                    }
+
+                } catch (SQLException e) {
+
+                    JOptionPane.showMessageDialog(null, e.toString());
+
+                }
+
+            }
+
+            
+
+          
+
+        }
+
+        String valorSeleccionadoSer = cbServicios.getSelectedItem().toString();
+
+             if(valorSeleccionadoSer.equals("seleciona un servicio")){
+
+          
+
+            lbPrecioServicio.setText("");
+
+            txtArea.setText("");
+
+        }
+    }//GEN-LAST:event_cbServiciosItemStateChanged
+
+    private void cbServiciosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbServiciosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbServiciosActionPerformed
+
     private void btnPagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPagarActionPerformed
         // TODO add your handling code here:
-         
+        
+        Moto motoConn = (Moto) cbElejirMoto.getSelectedItem();
 
-          Moto motoConn = (Moto) cbElejirMoto.getSelectedItem();
+
 
          String valorSeleccionadoMot = cbElejirMoto.getSelectedItem().toString();
+
          String valorSeleccionadoSer = cbServicios.getSelectedItem().toString();
 
+
+
              if(valorSeleccionadoMot.equals("selecione una placa")){
+
                  JOptionPane.showMessageDialog(null, "selecione una placa");
+
              }else if(valorSeleccionadoSer.equals("seleciona un servicio")){
+
               JOptionPane.showMessageDialog(null, "selecione el servicio");
 
+
+
              }else{
+
               venta.setIdMoto(motoConn.getIdMoto());
+
               venta.setIdServicio(cbServicios.getSelectedIndex());
+
               venta.setIdRepuesto(99);
+
               
+
               ventaControl.vebntaServicio(venta);
+
               JOptionPane.showMessageDialog(null, "se realizo el servicio ala moto");
+
                  //tabla();
+
                  cbElejirMoto.setSelectedIndex(0);
+
                  cbServicios.setSelectedIndex(0);
+
                  lbMarca.setText("");
+
                  lbModelo.setText("");
+
                  lbPrecioServicio.setText("");
+
                  
+
              }
+
+
     }//GEN-LAST:event_btnPagarActionPerformed
 
-    public void tabla(){
-        int item = 0;
-        DefaultTableModel tablaS = new DefaultTableModel();
-        String placa=cbElejirMoto.getSelectedItem().toString();
-        String marca=lbMarca.getText();
-        String modelo=lbModelo.getText();
-        String servicios=cbServicios.getSelectedItem().toString();
-        String precio=lbPrecioServicio.getText();
-        item=item+1;
-        ArrayList lista = new ArrayList();
-        lista.add(item);
-        lista.add(placa);
-        lista.add(marca);
-        lista.add(modelo);
-        lista.add(servicios);
-        lista.add(precio);
-        
-        Object [] object = new Object[5];
-        object[0]=lista.get(1);
-        object[1]=lista.get(2);
-        object[2]=lista.get(3);
-        object[3]=lista.get(4);
-        object[4]=lista.get(5);
-        tablaS.addRow(object);
-        tablaServicio.setModel(tablaS);
-}
+    private void btnTablaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTablaActionPerformed
+        // TODO add your handling code here:
+        int idCliente = new Integer(mod.getIdCliente());
+        try {
+            Conexion conetar = new Conexion();
+            Connection con = conetar.conexion();
+            PreparedStatement ps = con.prepareStatement("call validartabla(?)");
+            ps.setInt(1, idCliente);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                if (idCliente > 0) {
+                    tabla(idCliente);
+
+                } else {
+                    JOptionPane.showMessageDialog(null, "no hay repuesto registrado");
+                }
+            }
+            ps.close();
+            con.close();
+            rs.close();
+        } catch (Exception e) {
+            System.out.println(e);
+            JOptionPane.showMessageDialog(null, "ERROR");
+
+        }
+    }//GEN-LAST:event_btnTablaActionPerformed
+
+    private void btnFacturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFacturaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnFacturaActionPerformed
+
+    public void tabla(int id) {
+
+        double total = 0;
+        try {
+            DefaultTableModel model = new DefaultTableModel();
+            tablaServicio.setModel(model);
+            Conexion conetar = new Conexion();
+            Connection con = conetar.conexion();
+            PreparedStatement ps = con.prepareStatement("call mostrarregistroservicio(?)");
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            ResultSetMetaData metaData = ps.getMetaData();
+
+            for (int i = 1; i <= metaData.getColumnCount(); i++) {
+                model.addColumn(metaData.getColumnLabel(i));
+            }
+            while (rs.next()) {
+
+                Object[] filas = new Object[metaData.getColumnCount()];
+                for (int i = 0; i < metaData.getColumnCount(); i++) {
+                    filas[i] = rs.getObject(i + 1);
+                    if (i == 4) {
+                        total += Double.parseDouble(filas[i].toString());
+                    }
+                }
+                model.addRow(filas);
+            }
+
+            ps.close();
+            ps.close();
+            con.close();
+            lbTotal.setText("" + total);
+
+        } catch (SQLException e) {
+            System.out.println(e);
+            JOptionPane.showMessageDialog(null, "ERROR");
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnFactura;
     private javax.swing.JButton btnPagar;
+    private javax.swing.JButton btnTabla;
     private javax.swing.JComboBox<String> cbElejirMoto;
     private javax.swing.JComboBox<String> cbServicios;
     private javax.swing.JLabel jLabel1;
@@ -387,11 +583,13 @@ public class PanelServicios extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel lbMarca;
     private javax.swing.JLabel lbModelo;
     private javax.swing.JLabel lbPrecioServicio;
+    private javax.swing.JLabel lbTotal;
     private javax.swing.JTable tablaServicio;
     private javax.swing.JTextArea txtArea;
     // End of variables declaration//GEN-END:variables

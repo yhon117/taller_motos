@@ -57,13 +57,14 @@ public class VistaPrincipal extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         mnCerar = new javax.swing.JMenuItem();
         menuReporte = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 204));
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Opciones"));
 
-        btnRejistrarMoto.setText("Rejistrar moto");
+        btnRejistrarMoto.setText("Registrar moto");
         btnRejistrarMoto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRejistrarMotoActionPerformed(evt);
@@ -114,7 +115,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
         escritorio.setLayout(escritorioLayout);
         escritorioLayout.setHorizontalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 588, Short.MAX_VALUE)
+            .addGap(0, 584, Short.MAX_VALUE)
         );
         escritorioLayout.setVerticalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -137,7 +138,16 @@ public class VistaPrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
 
-        menuReporte.setText("Repoerte");
+        menuReporte.setText("Reporte");
+
+        jMenuItem1.setText("Historial de ventas");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        menuReporte.add(jMenuItem1);
+
         jMenuBar1.add(menuReporte);
 
         setJMenuBar(jMenuBar1);
@@ -199,7 +209,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
 
     private void btnRepuestoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRepuestoActionPerformed
         // TODO add your handling code here:
-          PanelRepuesto panelRepuesto = new PanelRepuesto(mod);
+          PanelRepuestos panelRepuesto = new PanelRepuestos(mod);
        panelRepuesto.setSize(500,500);
        panelRepuesto.setLocation(0,0);
         escritorio.removeAll();
@@ -214,6 +224,13 @@ public class VistaPrincipal extends javax.swing.JFrame {
         salir.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_mnCerarActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+        VistaHistorialVenta historial = new VistaHistorialVenta(mod);
+        historial.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -258,6 +275,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lbApellido;
     private javax.swing.JMenu menuReporte;

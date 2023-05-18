@@ -5,27 +5,27 @@
  */
 package modelo;
 
-import java.util.ArrayList;
-
 /**
  *
  * @author jhonb
  */
 public class Factura {
-    private int idFactura;
-    private double total;
-    private Empleado idEmpleado;
-    private ArrayList<Pago> pago;
-    
-    public Factura(){
-        
-    }
+  private int idFactura; 
+  private String monto; 
+  private String cliente; 
+  private String apellido;
+  private int venta_idventa; 
+  
+  public Factura(){
+      
+  }
 
-    public Factura(int idFactura, double total, Empleado idEmpleado, ArrayList<Pago> pago) {
+    public Factura(int idFactura, String monto, String cliente, String apellido, int venta_idventa) {
         this.idFactura = idFactura;
-        this.total = total;
-        this.idEmpleado = idEmpleado;
-        this.pago = pago;
+        this.monto = monto;
+        this.cliente = cliente;
+        this.apellido = apellido;
+        this.venta_idventa = venta_idventa;
     }
 
     public int getIdFactura() {
@@ -36,29 +36,39 @@ public class Factura {
         this.idFactura = idFactura;
     }
 
-    public double getTotal() {
-        return total;
+    public String getMonto() {
+        return monto;
     }
 
-    public void setTotal(double total) {
-        this.total = total;
+    public void setMonto(String monto) {
+        this.monto = monto;
     }
 
-    public Empleado getIdEmpleado() {
-        return idEmpleado;
+    public String getCliente() {
+        return cliente;
     }
 
-    public void setIdEmpleado(Empleado idEmpleado) {
-        this.idEmpleado = idEmpleado;
+    public void setCliente(String cliente) {
+        this.cliente = cliente;
     }
 
-    public ArrayList<Pago> getPago() {
-        return pago;
+    public String getApellido() {
+        return apellido;
     }
 
-    public void setPago(ArrayList<Pago> pago) {
-        this.pago = pago;
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
     }
+
+    public int getVenta_idventa() {
+        return venta_idventa;
+    }
+
+    public void setVenta_idventa(int venta_idventa) {
+        this.venta_idventa = venta_idventa;
+    }
+  
+  
     
     
 }

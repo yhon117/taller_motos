@@ -234,7 +234,7 @@ public class VistaCrearCuenta extends javax.swing.JFrame {
 
                     } else {
                         controlCliente.insertarCliente(cliente);
-                        JOptionPane.showMessageDialog(null, "CUENTA CREADAD  ");
+                        JOptionPane.showMessageDialog(null, "CUENTA CREADA");
                          VistaLogin login = new VistaLogin();
            login.setVisible(true);
            this.dispose();

@@ -21,8 +21,18 @@
         </Menu>
         <Menu class="javax.swing.JMenu" name="menuReporte">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Repoerte"/>
+            <Property name="text" type="java.lang.String" value="Reporte"/>
           </Properties>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem1">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Historial de ventas"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem1ActionPerformed"/>
+              </Events>
+            </MenuItem>
+          </SubComponents>
         </Menu>
       </SubComponents>
     </Menu>
@@ -129,7 +139,7 @@
       <SubComponents>
         <Component class="javax.swing.JButton" name="btnRejistrarMoto">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Rejistrar moto"/>
+            <Property name="text" type="java.lang.String" value="Registrar moto"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRejistrarMotoActionPerformed"/>
@@ -163,7 +173,7 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="588" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="584" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">

@@ -13,6 +13,7 @@ import java.awt.event.ItemEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
@@ -26,36 +27,37 @@ import modelo.Venta;
  *
  * @author jhonb
  */
-public class PanelRepuesto extends javax.swing.JPanel {
+public class PanelRepuestos extends javax.swing.JPanel {
 
     /**
      * Creates new form VistaRepuesto
      */
-    Repuesto repuesto = new Repuesto();
     ServicioController servicioCon = new ServicioController();
     RepuestoController repuestoCon = new RepuestoController();
-        Venta venta = new Venta();
-            VentaController ventaControl = new VentaController();
-
+    Venta venta = new Venta();
+    VentaController ventaControl = new VentaController();
 
     Cliente mod;
-    public PanelRepuesto() {
+
+    public PanelRepuestos() {
         initComponents();
 
     }
 
-       public PanelRepuesto(Cliente mod) {
+    public PanelRepuestos(Cliente mod) {
         initComponents();
         lbPrecioRepuesto.setText("");
-          lbMarca.setText("");
+        lbMarca.setText("");
         lbModelo.setText("");
-        this.mod=mod;
+        lbTotal.setText("");
+        this.mod = mod;
         int idCliente = new Integer(mod.getIdCliente());
         DefaultComboBoxModel mostrarNombre = new DefaultComboBoxModel(repuestoCon.nombreRepuesto());
         cbRepuesto.setModel(mostrarNombre);
-         DefaultComboBoxModel mostrarPlaca = new DefaultComboBoxModel(servicioCon.nombreMoto(idCliente));
+        DefaultComboBoxModel mostrarPlaca = new DefaultComboBoxModel(servicioCon.nombreMoto(idCliente));
         cbElejirMoto.setModel(mostrarPlaca);
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -76,8 +78,13 @@ public class PanelRepuesto extends javax.swing.JPanel {
         lbModelo = new javax.swing.JLabel();
         lbMarca = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tablaRepuesto = new javax.swing.JTable();
         btnPagar = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        lbTotal = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+
+        setBorder(javax.swing.BorderFactory.createTitledBorder("Servicios"));
 
         jLabel2.setText("Elija la moto");
 
@@ -112,7 +119,7 @@ public class PanelRepuesto extends javax.swing.JPanel {
 
         lbMarca.setText("jLabel7");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tablaRepuesto.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -120,10 +127,10 @@ public class PanelRepuesto extends javax.swing.JPanel {
                 {null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "", "", "", ""
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tablaRepuesto);
 
         btnPagar.setText("Pagar");
         btnPagar.addActionListener(new java.awt.event.ActionListener() {
@@ -131,6 +138,17 @@ public class PanelRepuesto extends javax.swing.JPanel {
                 btnPagarActionPerformed(evt);
             }
         });
+
+        jButton1.setText("hisotrial repuesto");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        lbTotal.setText("jLabel7");
+
+        jLabel5.setText("TOTAL");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -163,10 +181,17 @@ public class PanelRepuesto extends javax.swing.JPanel {
                                         .addComponent(jLabel6)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(lbModelo))))))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 381, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(63, Short.MAX_VALUE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel5)
+                            .addGap(18, 18, 18)
+                            .addComponent(lbTotal))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 381, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(53, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addComponent(btnPagar)
+                .addGap(18, 18, 18)
+                .addComponent(jButton1)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -199,15 +224,19 @@ public class PanelRepuesto extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btnPagar)
-                .addContainerGap(39, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnPagar)
+                    .addComponent(jButton1)
+                    .addComponent(lbTotal)
+                    .addComponent(jLabel5))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void cbRepuestoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbRepuestoItemStateChanged
         // TODO add your handling code here:
         if (evt.getStateChange() == ItemEvent.SELECTED) {
-           Repuesto repuestoCon = (Repuesto) cbRepuesto.getSelectedItem();
+            Repuesto repuestoCon = (Repuesto) cbRepuesto.getSelectedItem();
             try {
                 PreparedStatement ps;
                 ResultSet rs;
@@ -223,13 +252,13 @@ public class PanelRepuesto extends javax.swing.JPanel {
             } catch (SQLException e) {
                 JOptionPane.showMessageDialog(null, e.toString());
             }
-       
+
         }
-         String valorSeleccionadoSer = cbRepuesto.getSelectedItem().toString();
-             if(valorSeleccionadoSer.equals("seleciona un repuesto")){
-          
+        String valorSeleccionadoSer = cbRepuesto.getSelectedItem().toString();
+        if (valorSeleccionadoSer.equals("seleciona un repuesto")) {
+
             lbPrecioRepuesto.setText("");
-           
+
         }
     }//GEN-LAST:event_cbRepuestoItemStateChanged
 
@@ -241,10 +270,9 @@ public class PanelRepuesto extends javax.swing.JPanel {
 
     private void cbElejirMotoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbElejirMotoItemStateChanged
         // TODO add your handling code here:
-        
-        
-        if(evt.getStateChange() == ItemEvent.SELECTED){
-            Moto motoCon =(Moto) cbElejirMoto.getSelectedItem();
+
+        if (evt.getStateChange() == ItemEvent.SELECTED) {
+            Moto motoCon = (Moto) cbElejirMoto.getSelectedItem();
             try {
                 PreparedStatement ps;
                 ResultSet rs;
@@ -260,29 +288,29 @@ public class PanelRepuesto extends javax.swing.JPanel {
             } catch (SQLException e) {
                 JOptionPane.showMessageDialog(null, e.toString());
             }
-            if (evt.getStateChange() == ItemEvent.SELECTED){
+            if (evt.getStateChange() == ItemEvent.SELECTED) {
                 try {
-                PreparedStatement ps;
-                ResultSet rs;
-                Conexion conetar = new Conexion();
-                Connection con = conetar.conexion();
-                String sql = "select modelo from moto where idmoto=" + motoCon.getIdMoto();
-                ps = con.prepareStatement(sql);
-                rs = ps.executeQuery();
-                while (rs.next()) {
-                    lbModelo.setText(rs.getString("modelo"));
+                    PreparedStatement ps;
+                    ResultSet rs;
+                    Conexion conetar = new Conexion();
+                    Connection con = conetar.conexion();
+                    String sql = "select modelo from moto where idmoto=" + motoCon.getIdMoto();
+                    ps = con.prepareStatement(sql);
+                    rs = ps.executeQuery();
+                    while (rs.next()) {
+                        lbModelo.setText(rs.getString("modelo"));
 
+                    }
+                } catch (SQLException e) {
+                    JOptionPane.showMessageDialog(null, e.toString());
                 }
-            } catch (SQLException e) {
-                JOptionPane.showMessageDialog(null, e.toString());
-            }
             }
         }
-           String valorSeleccionadoMot = cbElejirMoto.getSelectedItem().toString();
-             if(valorSeleccionadoMot.equals("selecione una placa")){
+        String valorSeleccionadoMot = cbElejirMoto.getSelectedItem().toString();
+        if (valorSeleccionadoMot.equals("selecione una placa")) {
             lbMarca.setText("");
             lbModelo.setText("");
-           
+
         }
     }//GEN-LAST:event_cbElejirMotoItemStateChanged
 
@@ -294,12 +322,12 @@ public class PanelRepuesto extends javax.swing.JPanel {
         String valorSeleccionadoMot = cbElejirMoto.getSelectedItem().toString();
         String valorSeleccionadoSer = cbRepuesto.getSelectedItem().toString();
 
-        if(valorSeleccionadoMot.equals("selecione una placa")){
+        if (valorSeleccionadoMot.equals("selecione una placa")) {
             JOptionPane.showMessageDialog(null, "selecione una placa");
-        }else if(valorSeleccionadoSer.equals("seleciona un servicio")){
+        } else if (valorSeleccionadoSer.equals("seleciona un servicio")) {
             JOptionPane.showMessageDialog(null, "selecione el servicio");
 
-        }else{
+        } else {
             venta.setIdMoto(motoConn.getIdMoto());
             venta.setIdServicio(99);
             venta.setIdRepuesto(cbRepuesto.getSelectedIndex());
@@ -316,20 +344,88 @@ public class PanelRepuesto extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnPagarActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        int idCliente = new Integer(mod.getIdCliente());
+        try {
+            Conexion conetar = new Conexion();
+            Connection con = conetar.conexion();
+            PreparedStatement ps = con.prepareStatement("call validartablarepuesto(?)");
+            ps.setInt(1, idCliente);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                if (idCliente > 0) {
+                    tabla(idCliente);
+
+                } else {
+                    JOptionPane.showMessageDialog(null, "no hay repuesto registrado");
+                }
+            }
+            ps.close();
+            con.close();
+            rs.close();
+        } catch (Exception e) {
+            System.out.println(e);
+            JOptionPane.showMessageDialog(null, "ERROR");
+
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    public void tabla(int id) {
+
+        double total = 0;
+        try {
+            DefaultTableModel model = new DefaultTableModel();
+            tablaRepuesto.setModel(model);
+            Conexion conetar = new Conexion();
+            Connection con = conetar.conexion();
+            PreparedStatement ps = con.prepareStatement("call mostrarregistrorepuesto(?)");
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            ResultSetMetaData metaData = ps.getMetaData();
+
+            for (int i = 1; i <= metaData.getColumnCount(); i++) {
+                model.addColumn(metaData.getColumnLabel(i));
+            }
+            while (rs.next()) {
+
+                Object[] filas = new Object[metaData.getColumnCount()];
+                for (int i = 0; i < metaData.getColumnCount(); i++) {
+                    filas[i] = rs.getObject(i + 1);
+                    if (i == 4) {
+                        total += Double.parseDouble(filas[i].toString());
+                    }
+                }
+                model.addRow(filas);
+            }
+
+            ps.close();
+            ps.close();
+            con.close();
+            lbTotal.setText("" + total);
+
+        } catch (SQLException e) {
+            System.out.println(e);
+            JOptionPane.showMessageDialog(null, "ERROR");
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnPagar;
     private javax.swing.JComboBox<String> cbElejirMoto;
     private javax.swing.JComboBox<String> cbRepuesto;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lbMarca;
     private javax.swing.JLabel lbModelo;
     private javax.swing.JLabel lbPrecioRepuesto;
+    private javax.swing.JLabel lbTotal;
+    private javax.swing.JTable tablaRepuesto;
     // End of variables declaration//GEN-END:variables
 }

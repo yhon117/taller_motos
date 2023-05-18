@@ -140,7 +140,7 @@ public class VistaLogin extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(rootPane, "USUARIO/CONTASEÑA ICORRECOTS");
             }
         } else {
-            JOptionPane.showMessageDialog(rootPane, "FALTAN CAMPS POR LLENAR");
+            JOptionPane.showMessageDialog(rootPane, "FALTAN CAMPOS POR LLENAR");
 
         }
 

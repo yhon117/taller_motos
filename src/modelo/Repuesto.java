@@ -23,25 +23,18 @@ public class Repuesto {
     private int idRepuesto;
     private String nombreRepuesto;
     private double costo;
-    private ArrayList<Proveedor> idProveedor;
     
+    
+
     public Repuesto(){
-       this.idProveedor = new ArrayList<Proveedor>(); 
+        
     }
 
-    
+
     public Repuesto(int idRepuesto, String nombreRepuesto, double costo) {
         this.idRepuesto = idRepuesto;
         this.nombreRepuesto = nombreRepuesto;
         this.costo = costo;
-        this.idProveedor = new ArrayList<Proveedor>();
-    }
-
-    public Repuesto(int idRepuesto, String nombreRepuesto, double costo, ArrayList<Proveedor> idProveedor) {
-        this.idRepuesto = idRepuesto;
-        this.nombreRepuesto = nombreRepuesto;
-        this.costo = costo;
-        this.idProveedor = idProveedor;
     }
 
     public int getIdRepuesto() {
@@ -68,13 +61,7 @@ public class Repuesto {
         this.costo = costo;
     }
 
-    public ArrayList<Proveedor> getIdProveedor() {
-        return idProveedor;
-    }
-
-    public void setIdProveedor(ArrayList<Proveedor> idProveedor) {
-        this.idProveedor = idProveedor;
-    }
+  
     
     public String toString(){
         return this.nombreRepuesto;
