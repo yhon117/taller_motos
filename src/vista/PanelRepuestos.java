@@ -324,8 +324,8 @@ public class PanelRepuestos extends javax.swing.JPanel {
 
         if (valorSeleccionadoMot.equals("selecione una placa")) {
             JOptionPane.showMessageDialog(null, "selecione una placa");
-        } else if (valorSeleccionadoSer.equals("seleciona un servicio")) {
-            JOptionPane.showMessageDialog(null, "selecione el servicio");
+        } else if (valorSeleccionadoSer.equals("seleciona un repuesto")) {
+            JOptionPane.showMessageDialog(null, "selecione un repuesto");
 
         } else {
             venta.setIdMoto(motoConn.getIdMoto());

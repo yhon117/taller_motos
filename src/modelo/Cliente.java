@@ -109,6 +109,8 @@ public class Cliente {
         this.idTipo = idTipo;
     }
     
-    
+    public String toString(){
+        return this.cedula;
+    }
     
 }

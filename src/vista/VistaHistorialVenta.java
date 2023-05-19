@@ -6,6 +6,8 @@
 package vista;
 
 import conexion.Conexion;
+import controlador.ReportesController;
+import controlador.RepuestoController;
 import controlador.ServicioController;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -26,8 +28,9 @@ public class VistaHistorialVenta extends javax.swing.JFrame {
     /**
      * Creates new form VistaHistorialVenta
      */
-    
+        ReportesController reporteCon = new ReportesController();
         ServicioController servicioCon = new ServicioController();
+        RepuestoController repuestoCon = new RepuestoController();
 
     Cliente mod;
 
@@ -44,6 +47,12 @@ public class VistaHistorialVenta extends javax.swing.JFrame {
         lbTotalRepuesto.setText("");
         DefaultComboBoxModel mostrarNombre = new DefaultComboBoxModel(servicioCon.nombreServicio());
         cbServicio.setModel(mostrarNombre);
+        DefaultComboBoxModel cedula = new DefaultComboBoxModel(reporteCon.cedula());
+        cbCedula.setModel(cedula);
+        DefaultComboBoxModel nombreRpuesto = new DefaultComboBoxModel(repuestoCon.nombreRepuesto());
+        cbRepuesto.setModel(nombreRpuesto);
+        DefaultComboBoxModel cedulaRe = new DefaultComboBoxModel(reporteCon.cedula());
+        cbCedulaRepuesto.setModel(cedulaRe);
 
     }
 
@@ -57,6 +66,7 @@ public class VistaHistorialVenta extends javax.swing.JFrame {
     private void initComponents() {
 
         bgServicio = new javax.swing.ButtonGroup();
+        bgRepuesto = new javax.swing.ButtonGroup();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaRepuesto = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -69,15 +79,16 @@ public class VistaHistorialVenta extends javax.swing.JFrame {
         lbAdmin = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         lbTotalServicio = new javax.swing.JLabel();
-        jRadioButton5 = new javax.swing.JRadioButton();
-        jRadioButton6 = new javax.swing.JRadioButton();
-        jRadioButton7 = new javax.swing.JRadioButton();
-        jRadioButton8 = new javax.swing.JRadioButton();
+        rbRepuestoMasVendido = new javax.swing.JRadioButton();
+        rbRepuestoMenosVendido = new javax.swing.JRadioButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         lbTotalRepuesto = new javax.swing.JLabel();
         cbServicio = new javax.swing.JComboBox<>();
+        cbCedula = new javax.swing.JComboBox<>();
+        cbRepuesto = new javax.swing.JComboBox<>();
+        cbCedulaRepuesto = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -135,13 +146,16 @@ public class VistaHistorialVenta extends javax.swing.JFrame {
 
         lbTotalServicio.setText("jLabel3");
 
-        jRadioButton5.setText("jRadioButton5");
+        bgRepuesto.add(rbRepuestoMasVendido);
+        rbRepuestoMasVendido.setText("Repuesto mas vendio");
 
-        jRadioButton6.setText("jRadioButton6");
-
-        jRadioButton7.setText("jRadioButton7");
-
-        jRadioButton8.setText("jRadioButton8");
+        bgRepuesto.add(rbRepuestoMenosVendido);
+        rbRepuestoMenosVendido.setText("Rpuesto menos vendido");
+        rbRepuestoMenosVendido.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbRepuestoMenosVendidoActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("todos los repuesto");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -150,13 +164,44 @@ public class VistaHistorialVenta extends javax.swing.JFrame {
             }
         });
 
-        jButton4.setText("jButton4");
+        jButton4.setText("Buscar");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jLabel3.setText("TOTAL DE REPUESTO");
 
         lbTotalRepuesto.setText("jLabel4");
 
         cbServicio.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbServicio.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbServicioItemStateChanged(evt);
+            }
+        });
+
+        cbCedula.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbCedula.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbCedulaItemStateChanged(evt);
+            }
+        });
+
+        cbRepuesto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbRepuesto.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbRepuestoItemStateChanged(evt);
+            }
+        });
+
+        cbCedulaRepuesto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbCedulaRepuesto.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbCedulaRepuestoItemStateChanged(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -171,15 +216,16 @@ public class VistaHistorialVenta extends javax.swing.JFrame {
                                 .addComponent(jButton1)
                                 .addGap(18, 18, 18)
                                 .addComponent(btnBuscar))
-                            .addComponent(jRadioButton5)
-                            .addComponent(jRadioButton6)
-                            .addComponent(jRadioButton7)
-                            .addComponent(jRadioButton8)
+                            .addComponent(rbRepuestoMasVendido)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jButton3)
                                 .addGap(18, 18, 18)
-                                .addComponent(jButton4)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
+                                .addComponent(jButton4))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(cbCedulaRepuesto, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(cbRepuesto, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(rbRepuestoMenosVendido, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 756, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
@@ -198,7 +244,8 @@ public class VistaHistorialVenta extends javax.swing.JFrame {
                                 .addComponent(jLabel1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(lbAdmin))
-                            .addComponent(cbServicio, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(cbServicio, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cbCedula, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -228,30 +275,30 @@ public class VistaHistorialVenta extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addComponent(cbServicio, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(58, 58, 58)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton1)
-                            .addComponent(btnBuscar))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)))
+                        .addGap(18, 18, 18)
+                        .addComponent(cbCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnBuscar)
+                            .addComponent(jButton1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jRadioButton5)
+                        .addComponent(rbRepuestoMasVendido)
                         .addGap(18, 18, 18)
-                        .addComponent(jRadioButton6)
+                        .addComponent(rbRepuestoMenosVendido)
                         .addGap(18, 18, 18)
-                        .addComponent(jRadioButton7)
-                        .addGap(18, 18, 18)
-                        .addComponent(jRadioButton8)
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton3)
-                            .addComponent(jButton4))))
-                .addGap(13, 13, 13)
+                        .addComponent(cbRepuesto, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(17, 17, 17)
+                        .addComponent(cbCedulaRepuesto, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(lbTotalRepuesto))
-                .addGap(15, 15, 15))
+                    .addComponent(lbTotalRepuesto)
+                    .addComponent(jButton3)
+                    .addComponent(jButton4))
+                .addGap(7, 7, 7))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(16, 16, 16)
@@ -342,10 +389,40 @@ public class VistaHistorialVenta extends javax.swing.JFrame {
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         // TODO add your handling code here:
         filtro();
-        filtroCombo();
+        
     }//GEN-LAST:event_btnBuscarActionPerformed
 
-    public void filtro() {
+    private void cbServicioItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbServicioItemStateChanged
+        // TODO add your handling code here:
+        filtroCombo();
+    }//GEN-LAST:event_cbServicioItemStateChanged
+
+    private void cbCedulaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbCedulaItemStateChanged
+        // TODO add your handling code here:
+        
+        filtraCeula();
+    }//GEN-LAST:event_cbCedulaItemStateChanged
+
+    private void rbRepuestoMenosVendidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbRepuestoMenosVendidoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rbRepuestoMenosVendidoActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        filtroRepueto();
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void cbRepuestoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbRepuestoItemStateChanged
+        // TODO add your handling code here:
+        filttoRepuestoCombo();
+    }//GEN-LAST:event_cbRepuestoItemStateChanged
+
+    private void cbCedulaRepuestoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbCedulaRepuestoItemStateChanged
+        // TODO add your handling code here:
+        filtraComboCedula();
+    }//GEN-LAST:event_cbCedulaRepuestoItemStateChanged
+
+    private void filtro() {
 
         try {
             if (!rbServicioVendido.isSelected() && !rbServioMenosVendido.isSelected()) {
@@ -378,6 +455,8 @@ public class VistaHistorialVenta extends javax.swing.JFrame {
                         ps.close();
                         con.close();
                         lbTotalServicio.setText("");
+                        cbServicio.setSelectedIndex(0);
+
 
                     } catch (SQLException e) {
                         System.out.println(e);
@@ -412,6 +491,8 @@ public class VistaHistorialVenta extends javax.swing.JFrame {
                         ps.close();
                         con.close();
                         lbTotalServicio.setText("");
+                        cbServicio.setSelectedIndex(0);
+
 
                     } catch (SQLException e) {
                         System.out.println(e);
@@ -419,13 +500,14 @@ public class VistaHistorialVenta extends javax.swing.JFrame {
                     }
                 }
             }
-            
-          
+
+
         } catch (Exception e) {
         }
     }
+
     
-    public void filtroCombo(){
+    private void filtroCombo(){
         
                String valorSeleccionadoSer = cbServicio.getSelectedItem().toString();
 
@@ -460,6 +542,8 @@ public class VistaHistorialVenta extends javax.swing.JFrame {
             ps.close();
             ps.close();
             con.close();
+            lbTotalServicio.setText("");
+            bgServicio.clearSelection();
 
         } catch (SQLException e) {
             System.out.println(e);
@@ -469,7 +553,228 @@ public class VistaHistorialVenta extends javax.swing.JFrame {
         } catch (Exception e) {
         }
     }
+    
+    private void filtraCeula(){
+        Cliente cli =(Cliente) cbCedula.getSelectedItem();
+              String valorSeleccionadoSer = cbCedula.getSelectedItem().toString();
 
+        try {
+              if(valorSeleccionadoSer.equals("selecione una cedula")){
+
+              JOptionPane.showMessageDialog(null, "selecione la cedula");
+            }else{
+                try {
+            DefaultTableModel model = new DefaultTableModel();
+            tablaServicio.setModel(model);
+            Conexion conetar = new Conexion();
+            Connection con = conetar.conexion();
+            PreparedStatement ps = con.prepareCall("call reporteserviciocedula(?)");
+            ps.setString(1, cli.getCedula());
+            ResultSet rs = ps.executeQuery();
+            ResultSetMetaData metaData = ps.getMetaData();
+
+            for (int i = 1; i <= metaData.getColumnCount(); i++) {
+                model.addColumn(metaData.getColumnLabel(i));
+            }
+            while (rs.next()) {
+
+                Object[] filas = new Object[metaData.getColumnCount()];
+                for (int i = 0; i < metaData.getColumnCount(); i++) {
+                    filas[i] = rs.getObject(i + 1);
+                   
+                }
+                model.addRow(filas);
+            }
+
+            ps.close();
+            ps.close();
+            con.close();
+            lbTotalServicio.setText("");
+            bgServicio.clearSelection();
+            cbServicio.setSelectedIndex(0);
+
+        } catch (SQLException e) {
+            System.out.println(e);
+            JOptionPane.showMessageDialog(null, "ERROR");
+        }
+            }
+        } catch (Exception e) {
+        }
+    }
+    
+     private void filtroRepueto() {
+
+        try {
+            if (!rbRepuestoMasVendido.isSelected() && !rbRepuestoMenosVendido.isSelected()) {
+                JOptionPane.showMessageDialog(rootPane, "elija una opcion");
+            } else {
+                if (rbRepuestoMasVendido.isSelected()) {
+                    try {
+                        DefaultTableModel model = new DefaultTableModel();
+                        tablaRepuesto.setModel(model);
+                        Conexion conetar = new Conexion();
+                        Connection con = conetar.conexion();
+                        PreparedStatement ps = con.prepareStatement("call repuestomasvendido()");
+                        ResultSet rs = ps.executeQuery();
+                        ResultSetMetaData metaData = ps.getMetaData();
+
+                        for (int i = 1; i <= metaData.getColumnCount(); i++) {
+                            model.addColumn(metaData.getColumnLabel(i));
+                        }
+                        while (rs.next()) {
+
+                            Object[] filas = new Object[metaData.getColumnCount()];
+                            for (int i = 0; i < metaData.getColumnCount(); i++) {
+                                filas[i] = rs.getObject(i + 1);
+
+                            }
+                            model.addRow(filas);
+                        }
+
+                        ps.close();
+                        ps.close();
+                        con.close();
+                        lbTotalRepuesto.setText("");
+                        
+
+
+                    } catch (SQLException e) {
+                        System.out.println(e);
+                        JOptionPane.showMessageDialog(null, "ERROR");
+                    }
+                }
+
+                if (rbRepuestoMenosVendido.isSelected()) {
+                    try {
+                        DefaultTableModel model = new DefaultTableModel();
+                        tablaRepuesto.setModel(model);
+                        Conexion conetar = new Conexion();
+                        Connection con = conetar.conexion();
+                        PreparedStatement ps = con.prepareStatement("call repuestomenosvendido()");
+                        ResultSet rs = ps.executeQuery();
+                        ResultSetMetaData metaData = ps.getMetaData();
+
+                        for (int i = 1; i <= metaData.getColumnCount(); i++) {
+                            model.addColumn(metaData.getColumnLabel(i));
+                        }
+                        while (rs.next()) {
+
+                            Object[] filas = new Object[metaData.getColumnCount()];
+                            for (int i = 0; i < metaData.getColumnCount(); i++) {
+                                filas[i] = rs.getObject(i + 1);
+
+                            }
+                            model.addRow(filas);
+                        }
+
+                        ps.close();
+                        ps.close();
+                        con.close();
+                        lbTotalServicio.setText("");
+
+                    } catch (SQLException e) {
+                        System.out.println(e);
+                        JOptionPane.showMessageDialog(null, "ERROR");
+                    }
+                }
+            }
+
+
+        } catch (Exception e) {
+        }
+    }
+
+     private void filttoRepuestoCombo(){
+      String valorSeleccionadoSer = cbRepuesto.getSelectedItem().toString();
+
+         try {
+              if(valorSeleccionadoSer.equals("seleciona un repuesto")){
+
+              JOptionPane.showMessageDialog(null, "selecione el repuesto");
+            }else{
+                try {
+            DefaultTableModel model = new DefaultTableModel();
+            tablaRepuesto.setModel(model);
+            Conexion conetar = new Conexion();
+            Connection con = conetar.conexion();
+            PreparedStatement ps = con.prepareStatement("call reporterepuestoid(?)");
+            ps.setInt(1, cbRepuesto.getSelectedIndex());
+            ResultSet rs = ps.executeQuery();
+            ResultSetMetaData metaData = ps.getMetaData();
+
+            for (int i = 1; i <= metaData.getColumnCount(); i++) {
+                model.addColumn(metaData.getColumnLabel(i));
+            }
+            while (rs.next()) {
+
+                Object[] filas = new Object[metaData.getColumnCount()];
+                for (int i = 0; i < metaData.getColumnCount(); i++) {
+                    filas[i] = rs.getObject(i + 1);
+                   
+                }
+                model.addRow(filas);
+            }
+
+            ps.close();
+            ps.close();
+            con.close();
+            lbTotalRepuesto.setText("");
+
+        } catch (SQLException e) {
+            System.out.println(e);
+            JOptionPane.showMessageDialog(null, "ERROR");
+        }
+            }
+        } catch (Exception e) {
+        }
+     }
+     
+     private void filtraComboCedula(){
+        Cliente cli =(Cliente) cbCedulaRepuesto.getSelectedItem();
+              String valorSeleccionadoSer = cbCedulaRepuesto.getSelectedItem().toString();
+
+        try {
+              if(valorSeleccionadoSer.equals("selecione una cedula")){
+
+              JOptionPane.showMessageDialog(null, "selecione la cedula");
+            }else{
+                try {
+            DefaultTableModel model = new DefaultTableModel();
+            tablaRepuesto.setModel(model);
+            Conexion conetar = new Conexion();
+            Connection con = conetar.conexion();
+            PreparedStatement ps = con.prepareCall("call reporterepuestocedula(?)");
+            ps.setString(1, cli.getCedula());
+            ResultSet rs = ps.executeQuery();
+            ResultSetMetaData metaData = ps.getMetaData();
+
+            for (int i = 1; i <= metaData.getColumnCount(); i++) {
+                model.addColumn(metaData.getColumnLabel(i));
+            }
+            while (rs.next()) {
+
+                Object[] filas = new Object[metaData.getColumnCount()];
+                for (int i = 0; i < metaData.getColumnCount(); i++) {
+                    filas[i] = rs.getObject(i + 1);
+                   
+                }
+                model.addRow(filas);
+            }
+
+            ps.close();
+            ps.close();
+            con.close();
+          
+
+        } catch (SQLException e) {
+            System.out.println(e);
+            JOptionPane.showMessageDialog(null, "ERROR");
+        }
+            }
+        } catch (Exception e) {
+        }
+    }
+     
     /**
      * @param args the command line arguments
      */
@@ -506,8 +811,12 @@ public class VistaHistorialVenta extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup bgRepuesto;
     private javax.swing.ButtonGroup bgServicio;
     private javax.swing.JButton btnBuscar;
+    private javax.swing.JComboBox<String> cbCedula;
+    private javax.swing.JComboBox<String> cbCedulaRepuesto;
+    private javax.swing.JComboBox<String> cbRepuesto;
     private javax.swing.JComboBox<String> cbServicio;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
@@ -515,15 +824,13 @@ public class VistaHistorialVenta extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JRadioButton jRadioButton5;
-    private javax.swing.JRadioButton jRadioButton6;
-    private javax.swing.JRadioButton jRadioButton7;
-    private javax.swing.JRadioButton jRadioButton8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lbAdmin;
     private javax.swing.JLabel lbTotalRepuesto;
     private javax.swing.JLabel lbTotalServicio;
+    private javax.swing.JRadioButton rbRepuestoMasVendido;
+    private javax.swing.JRadioButton rbRepuestoMenosVendido;
     private javax.swing.JRadioButton rbServicioVendido;
     private javax.swing.JRadioButton rbServioMenosVendido;
     private javax.swing.JTable tablaRepuesto;
