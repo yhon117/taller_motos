@@ -317,6 +317,7 @@ public class PanelRepuestos extends javax.swing.JPanel {
     private void btnPagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPagarActionPerformed
         // TODO add your handling code here:
 
+        Repuesto reCon = (Repuesto) cbRepuesto.getSelectedItem();
         Moto motoConn = (Moto) cbElejirMoto.getSelectedItem();
 
         String valorSeleccionadoMot = cbElejirMoto.getSelectedItem().toString();
@@ -330,7 +331,7 @@ public class PanelRepuestos extends javax.swing.JPanel {
         } else {
             venta.setIdMoto(motoConn.getIdMoto());
             venta.setIdServicio(99);
-            venta.setIdRepuesto(cbRepuesto.getSelectedIndex());
+            venta.setIdRepuesto(reCon.getIdRepuesto());
 
             ventaControl.vebntaServicio(venta);
             JOptionPane.showMessageDialog(null, "se realizo el repuesto ala moto");

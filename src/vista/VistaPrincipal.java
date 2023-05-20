@@ -31,6 +31,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
               
                 if(mod.getIdTipo()==1){
                    menuReporte.setVisible(false);
+                   menuCrear.setVisible(false);
                 }else if(mod.getIdTipo()==2){
                     
                 }
@@ -58,6 +59,11 @@ public class VistaPrincipal extends javax.swing.JFrame {
         mnCerar = new javax.swing.JMenuItem();
         menuReporte = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
+        menuCrear = new javax.swing.JMenu();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
+        jMenuItem5 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -150,6 +156,37 @@ public class VistaPrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(menuReporte);
 
+        menuCrear.setText("Crear");
+
+        jMenuItem2.setText("Crear cliente/admin");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        menuCrear.add(jMenuItem2);
+
+        jMenuItem3.setText("Crear moto");
+        menuCrear.add(jMenuItem3);
+
+        jMenuItem4.setText("Crear servicio");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
+        menuCrear.add(jMenuItem4);
+
+        jMenuItem5.setText("Crear repuesto");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
+        menuCrear.add(jMenuItem5);
+
+        jMenuBar1.add(menuCrear);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -232,6 +269,27 @@ public class VistaPrincipal extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        // TODO add your handling code here:
+        VistaCrearClienteAdmin crear = new VistaCrearClienteAdmin(mod);
+        crear.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        // TODO add your handling code here:
+        VistaCrearServicio servicio = new VistaCrearServicio(mod);
+        servicio.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        // TODO add your handling code here:
+        VistaCrearRepuesto repuesto = new VistaCrearRepuesto(mod);
+        repuesto.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -276,8 +334,13 @@ public class VistaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lbApellido;
+    private javax.swing.JMenu menuCrear;
     private javax.swing.JMenu menuReporte;
     private javax.swing.JMenuItem mnCerar;
     // End of variables declaration//GEN-END:variables

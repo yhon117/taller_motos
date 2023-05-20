@@ -18,6 +18,8 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.Cliente;
+import modelo.Repuesto;
+import modelo.Servicio;
 
 /**
  *
@@ -89,6 +91,9 @@ public class VistaHistorialVenta extends javax.swing.JFrame {
         cbCedula = new javax.swing.JComboBox<>();
         cbRepuesto = new javax.swing.JComboBox<>();
         cbCedulaRepuesto = new javax.swing.JComboBox<>();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -203,6 +208,20 @@ public class VistaHistorialVenta extends javax.swing.JFrame {
             }
         });
 
+        jMenu1.setText("Salir");
+
+        jMenuItem1.setText("volver al menu pricipal");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem1);
+
+        jMenuBar1.add(jMenu1);
+
+        setJMenuBar(jMenuBar1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -281,7 +300,7 @@ public class VistaHistorialVenta extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnBuscar)
                             .addComponent(jButton1))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
@@ -303,7 +322,7 @@ public class VistaHistorialVenta extends javax.swing.JFrame {
                 .addGroup(layout.createSequentialGroup()
                     .addGap(16, 16, 16)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(354, Short.MAX_VALUE)))
+                    .addContainerGap(331, Short.MAX_VALUE)))
         );
 
         pack();
@@ -341,6 +360,7 @@ public class VistaHistorialVenta extends javax.swing.JFrame {
             ps.close();
             con.close();
             lbTotalServicio.setText("" + total);
+            
 
         } catch (SQLException e) {
             System.out.println(e);
@@ -422,6 +442,13 @@ public class VistaHistorialVenta extends javax.swing.JFrame {
         filtraComboCedula();
     }//GEN-LAST:event_cbCedulaRepuestoItemStateChanged
 
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+        VistaPrincipal salir = new VistaPrincipal(mod);
+        salir.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
     private void filtro() {
 
         try {
@@ -455,7 +482,6 @@ public class VistaHistorialVenta extends javax.swing.JFrame {
                         ps.close();
                         con.close();
                         lbTotalServicio.setText("");
-                        cbServicio.setSelectedIndex(0);
 
 
                     } catch (SQLException e) {
@@ -491,7 +517,6 @@ public class VistaHistorialVenta extends javax.swing.JFrame {
                         ps.close();
                         con.close();
                         lbTotalServicio.setText("");
-                        cbServicio.setSelectedIndex(0);
 
 
                     } catch (SQLException e) {
@@ -508,7 +533,9 @@ public class VistaHistorialVenta extends javax.swing.JFrame {
 
     
     private void filtroCombo(){
-        
+        double total=0;
+                Servicio serCon = (Servicio)cbServicio.getSelectedItem();
+
                String valorSeleccionadoSer = cbServicio.getSelectedItem().toString();
 
         try {
@@ -522,7 +549,7 @@ public class VistaHistorialVenta extends javax.swing.JFrame {
             Conexion conetar = new Conexion();
             Connection con = conetar.conexion();
             PreparedStatement ps = con.prepareStatement("call reporteservicioid(?)");
-            ps.setInt(1, cbServicio.getSelectedIndex());
+            ps.setInt(1, serCon.getIdServicio());
             ResultSet rs = ps.executeQuery();
             ResultSetMetaData metaData = ps.getMetaData();
 
@@ -534,7 +561,9 @@ public class VistaHistorialVenta extends javax.swing.JFrame {
                 Object[] filas = new Object[metaData.getColumnCount()];
                 for (int i = 0; i < metaData.getColumnCount(); i++) {
                     filas[i] = rs.getObject(i + 1);
-                   
+                   if (i == 5) {
+                        total += Double.parseDouble(filas[i].toString());
+                    }
                 }
                 model.addRow(filas);
             }
@@ -542,7 +571,7 @@ public class VistaHistorialVenta extends javax.swing.JFrame {
             ps.close();
             ps.close();
             con.close();
-            lbTotalServicio.setText("");
+            lbTotalServicio.setText(""+total);
             bgServicio.clearSelection();
 
         } catch (SQLException e) {
@@ -555,6 +584,7 @@ public class VistaHistorialVenta extends javax.swing.JFrame {
     }
     
     private void filtraCeula(){
+        double total=0;
         Cliente cli =(Cliente) cbCedula.getSelectedItem();
               String valorSeleccionadoSer = cbCedula.getSelectedItem().toString();
 
@@ -581,7 +611,9 @@ public class VistaHistorialVenta extends javax.swing.JFrame {
                 Object[] filas = new Object[metaData.getColumnCount()];
                 for (int i = 0; i < metaData.getColumnCount(); i++) {
                     filas[i] = rs.getObject(i + 1);
-                   
+                   if (i == 5) {
+                        total += Double.parseDouble(filas[i].toString());
+                    }
                 }
                 model.addRow(filas);
             }
@@ -589,10 +621,8 @@ public class VistaHistorialVenta extends javax.swing.JFrame {
             ps.close();
             ps.close();
             con.close();
-            lbTotalServicio.setText("");
+            lbTotalServicio.setText(""+total);
             bgServicio.clearSelection();
-            cbServicio.setSelectedIndex(0);
-
         } catch (SQLException e) {
             System.out.println(e);
             JOptionPane.showMessageDialog(null, "ERROR");
@@ -685,6 +715,9 @@ public class VistaHistorialVenta extends javax.swing.JFrame {
     }
 
      private void filttoRepuestoCombo(){
+         double total=0;
+                 Repuesto reCon = (Repuesto) cbRepuesto.getSelectedItem();
+
       String valorSeleccionadoSer = cbRepuesto.getSelectedItem().toString();
 
          try {
@@ -698,7 +731,7 @@ public class VistaHistorialVenta extends javax.swing.JFrame {
             Conexion conetar = new Conexion();
             Connection con = conetar.conexion();
             PreparedStatement ps = con.prepareStatement("call reporterepuestoid(?)");
-            ps.setInt(1, cbRepuesto.getSelectedIndex());
+            ps.setInt(1, reCon.getIdRepuesto());
             ResultSet rs = ps.executeQuery();
             ResultSetMetaData metaData = ps.getMetaData();
 
@@ -710,7 +743,9 @@ public class VistaHistorialVenta extends javax.swing.JFrame {
                 Object[] filas = new Object[metaData.getColumnCount()];
                 for (int i = 0; i < metaData.getColumnCount(); i++) {
                     filas[i] = rs.getObject(i + 1);
-                   
+                   if (i == 5) {
+                        total += Double.parseDouble(filas[i].toString());
+                    }
                 }
                 model.addRow(filas);
             }
@@ -718,7 +753,7 @@ public class VistaHistorialVenta extends javax.swing.JFrame {
             ps.close();
             ps.close();
             con.close();
-            lbTotalRepuesto.setText("");
+            lbTotalRepuesto.setText(""+total);
 
         } catch (SQLException e) {
             System.out.println(e);
@@ -730,6 +765,7 @@ public class VistaHistorialVenta extends javax.swing.JFrame {
      }
      
      private void filtraComboCedula(){
+         double total=0;
         Cliente cli =(Cliente) cbCedulaRepuesto.getSelectedItem();
               String valorSeleccionadoSer = cbCedulaRepuesto.getSelectedItem().toString();
 
@@ -756,7 +792,9 @@ public class VistaHistorialVenta extends javax.swing.JFrame {
                 Object[] filas = new Object[metaData.getColumnCount()];
                 for (int i = 0; i < metaData.getColumnCount(); i++) {
                     filas[i] = rs.getObject(i + 1);
-                   
+                   if (i == 5) {
+                        total += Double.parseDouble(filas[i].toString());
+                    }
                 }
                 model.addRow(filas);
             }
@@ -764,6 +802,7 @@ public class VistaHistorialVenta extends javax.swing.JFrame {
             ps.close();
             ps.close();
             con.close();
+            lbTotalRepuesto.setText(""+total);
           
 
         } catch (SQLException e) {
@@ -824,6 +863,9 @@ public class VistaHistorialVenta extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lbAdmin;

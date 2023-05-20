@@ -23,18 +23,16 @@ public class Servicio {
     private String nombre;
     private String descripcion;
     private double precio;
-    private int estado;
     
     public Servicio(){
         
     }
 
-    public Servicio(int idServicio, String nombre, String descripcion, double precio, int estado) {
+    public Servicio(int idServicio, String nombre, String descripcion, double precio) {
         this.idServicio = idServicio;
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.precio = precio;
-        this.estado = estado;
     }
 
     public int getIdServicio() {
@@ -69,13 +67,6 @@ public class Servicio {
         this.precio = precio;
     }
 
-    public int getEstado() {
-        return estado;
-    }
-
-    public void setEstado(int estado) {
-        this.estado = estado;
-    }
     
     public String toString(){
         return this.nombre;

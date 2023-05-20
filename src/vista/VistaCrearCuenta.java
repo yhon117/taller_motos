@@ -309,6 +309,8 @@ public class VistaCrearCuenta extends javax.swing.JFrame {
         txtUseario.setText("");
         txtTelefono1.setText("");
     }
+    
+   
 
     /**
      * @param args the command line arguments

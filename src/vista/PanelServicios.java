@@ -450,7 +450,7 @@ public class PanelServicios extends javax.swing.JPanel {
         
         Moto motoConn = (Moto) cbElejirMoto.getSelectedItem();
 
-
+        Servicio serCon = (Servicio)cbServicios.getSelectedItem();
 
          String valorSeleccionadoMot = cbElejirMoto.getSelectedItem().toString();
 
@@ -472,7 +472,7 @@ public class PanelServicios extends javax.swing.JPanel {
 
               venta.setIdMoto(motoConn.getIdMoto());
 
-              venta.setIdServicio(cbServicios.getSelectedIndex());
+              venta.setIdServicio(serCon.getIdServicio());
 
               venta.setIdRepuesto(99);
 
