@@ -140,7 +140,7 @@ public class PanelCrearMoto extends javax.swing.JPanel {
         } else if(motoControl.existePlaca(placa)!=0) {
                      JOptionPane.showMessageDialog(null, "EXISTE PLACA");
 
-        }else if(placa.length()>6){
+        }else if(placa.length()<6||placa.length()>6){
              JOptionPane.showMessageDialog(null, "6 caracteres limite para la placa");
 
         }else{

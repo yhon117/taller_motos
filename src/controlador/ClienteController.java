@@ -1,4 +1,4 @@
-    /*
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -18,9 +18,9 @@ import modelo.Cliente;
  * @author jhonb
  */
 public class ClienteController {
-    
-    public boolean insertarCliente(Cliente cliente){
-                try {
+
+    public boolean insertarCliente(Cliente cliente) {
+        try {
             Conexion conexion = new Conexion();
             Connection con = conexion.conexion();
             PreparedStatement ps;
@@ -41,13 +41,14 @@ public class ClienteController {
             return true;
 
         } catch (SQLException e) {
-                    System.out.println(e);
+            System.out.println(e);
             JOptionPane.showMessageDialog(null, "ERROR");
 
         }
         return false;
     }
-        public boolean existeCedula(String cedula) {
+
+    public boolean existeCedula(String cedula) {
 
         try {
             Conexion conexion = new Conexion();
@@ -59,18 +60,17 @@ public class ClienteController {
             ps.setString(1, cedula);
             rs = ps.executeQuery();
             return rs.next();
-            
-            
+
         } catch (SQLException e) {
-            
-System.out.println(e);
+
+            System.out.println(e);
             JOptionPane.showMessageDialog(null, "ERROR");
         }
         return false;
 
     }
-        
-           public boolean existeUsuario(String usuario) {
+
+    public boolean existeUsuario(String usuario) {
 
         try {
             Conexion conexion = new Conexion();
@@ -84,15 +84,15 @@ System.out.println(e);
             return rs.next();
 
         } catch (SQLException e) {
-            
-System.out.println(e);
+
+            System.out.println(e);
             JOptionPane.showMessageDialog(null, "ERROR");
         }
         return false;
 
     }
-           
-              public boolean existePaswoord(String paswoord) {
+
+    public boolean existePaswoord(String paswoord) {
 
         try {
             Conexion conexion = new Conexion();
@@ -106,14 +106,64 @@ System.out.println(e);
             return rs.next();
 
         } catch (SQLException e) {
-            
-System.out.println(e);
+
+            System.out.println(e);
             JOptionPane.showMessageDialog(null, "ERROR");
         }
         return false;
 
     }
-     
+
+    public boolean eliminarCliente(String cedula) {
+      try {
+            Conexion conexion = new Conexion();
+            Connection con = conexion.conexion();
+            PreparedStatement ps;
+            ResultSet rs;
+            String sql = "delete from cliente where cedula=?";
+            ps = con.prepareStatement(sql);
+            ps.setString(1, cedula);
+            ps.execute();
+            con.close();
+            ps.close();
+            return true;
+            
+
+        } catch (SQLException e) {
+
+            System.out.println(e);
+            JOptionPane.showMessageDialog(null, "ERROR");
+        }
+        return false;
+    }
     
-    
+    public boolean aptualizarCliente(Cliente cliente) {
+        try {
+            Conexion conexion = new Conexion();
+            Connection con = conexion.conexion();
+            PreparedStatement ps;
+            ResultSet rs;
+
+            String sql = "UPDATE cliente SET cedula=?, nombre=?, apellido=?, telefono=?, correo=?, usuario=?,contrasena=?,tipo_idtipo=?";
+            ps = con.prepareStatement(sql);
+            ps.setString(1, cliente.getCedula());
+            ps.setString(2, cliente.getNombre());
+            ps.setString(3, cliente.getApellido());
+            ps.setString(4, cliente.getTelefono());
+            ps.setString(5, cliente.getCorreo());
+            ps.setString(6, cliente.getUsuario());
+            ps.setString(7, cliente.getPaswoord());
+            ps.setInt(8, cliente.getIdTipo());
+            ps.execute();
+            con.close();
+            return true;
+
+        } catch (SQLException e) {
+            System.out.println(e);
+            JOptionPane.showMessageDialog(null, "ERROR");
+
+        }
+        return false;
+    }
+
 }

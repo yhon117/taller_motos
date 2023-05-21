@@ -49,11 +49,11 @@ public class VistaHistorialVenta extends javax.swing.JFrame {
         lbTotalRepuesto.setText("");
         DefaultComboBoxModel mostrarNombre = new DefaultComboBoxModel(servicioCon.nombreServicio());
         cbServicio.setModel(mostrarNombre);
-        DefaultComboBoxModel cedula = new DefaultComboBoxModel(reporteCon.cedula());
+        DefaultComboBoxModel cedula = new DefaultComboBoxModel(reporteCon.usuario());
         cbCedula.setModel(cedula);
         DefaultComboBoxModel nombreRpuesto = new DefaultComboBoxModel(repuestoCon.nombreRepuesto());
         cbRepuesto.setModel(nombreRpuesto);
-        DefaultComboBoxModel cedulaRe = new DefaultComboBoxModel(reporteCon.cedula());
+        DefaultComboBoxModel cedulaRe = new DefaultComboBoxModel(reporteCon.usuario());
         cbCedulaRepuesto.setModel(cedulaRe);
 
     }
@@ -244,17 +244,20 @@ public class VistaHistorialVenta extends javax.swing.JFrame {
                                 .addComponent(cbCedulaRepuesto, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(cbRepuesto, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(rbRepuestoMenosVendido, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
+                        .addGap(45, 45, 45)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 756, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 919, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(18, 18, 18)
-                                .addComponent(lbTotalServicio))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addGap(18, 18, 18)
-                                .addComponent(lbTotalRepuesto))))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel2)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(lbTotalServicio))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel3)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(lbTotalRepuesto)))
+                                .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(rbServicioVendido)
@@ -269,8 +272,8 @@ public class VistaHistorialVenta extends javax.swing.JFrame {
                 .addContainerGap())
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addContainerGap(289, Short.MAX_VALUE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 753, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(280, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 918, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(7, 7, 7)))
         );
         layout.setVerticalGroup(
@@ -284,40 +287,39 @@ public class VistaHistorialVenta extends javax.swing.JFrame {
                 .addComponent(rbServicioVendido)
                 .addGap(18, 18, 18)
                 .addComponent(rbServioMenosVendido)
+                .addGap(18, 18, 18)
+                .addComponent(cbServicio, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(cbCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(lbTotalServicio))
-                        .addGap(43, 43, 43))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(cbServicio, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(cbCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnBuscar)
                             .addComponent(jButton1))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(rbRepuestoMasVendido)
+                                .addGap(18, 18, 18)
+                                .addComponent(rbRepuestoMenosVendido)
+                                .addGap(18, 18, 18)
+                                .addComponent(cbRepuesto, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(17, 17, 17)
+                                .addComponent(cbCedulaRepuesto, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(30, 30, 30)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(lbTotalRepuesto)
+                            .addComponent(jButton3)
+                            .addComponent(jButton4))
+                        .addGap(7, 7, 7))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(rbRepuestoMasVendido)
-                        .addGap(18, 18, 18)
-                        .addComponent(rbRepuestoMenosVendido)
-                        .addGap(18, 18, 18)
-                        .addComponent(cbRepuesto, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(17, 17, 17)
-                        .addComponent(cbCedulaRepuesto, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(30, 30, 30)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(lbTotalRepuesto)
-                    .addComponent(jButton3)
-                    .addComponent(jButton4))
-                .addGap(7, 7, 7))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(lbTotalServicio))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(16, 16, 16)
@@ -561,7 +563,7 @@ public class VistaHistorialVenta extends javax.swing.JFrame {
                 Object[] filas = new Object[metaData.getColumnCount()];
                 for (int i = 0; i < metaData.getColumnCount(); i++) {
                     filas[i] = rs.getObject(i + 1);
-                   if (i == 5) {
+                   if (i == 6) {
                         total += Double.parseDouble(filas[i].toString());
                     }
                 }
@@ -589,17 +591,17 @@ public class VistaHistorialVenta extends javax.swing.JFrame {
               String valorSeleccionadoSer = cbCedula.getSelectedItem().toString();
 
         try {
-              if(valorSeleccionadoSer.equals("selecione una cedula")){
+              if(valorSeleccionadoSer.equals("selecione un usuario")){
 
-              JOptionPane.showMessageDialog(null, "selecione la cedula");
+              JOptionPane.showMessageDialog(null, "selecione un usuario");
             }else{
                 try {
             DefaultTableModel model = new DefaultTableModel();
             tablaServicio.setModel(model);
             Conexion conetar = new Conexion();
             Connection con = conetar.conexion();
-            PreparedStatement ps = con.prepareCall("call reporteserviciocedula(?)");
-            ps.setString(1, cli.getCedula());
+            PreparedStatement ps = con.prepareCall("call reporteserviciousuario(?)");
+            ps.setString(1, cli.getUsuario());
             ResultSet rs = ps.executeQuery();
             ResultSetMetaData metaData = ps.getMetaData();
 
@@ -611,7 +613,7 @@ public class VistaHistorialVenta extends javax.swing.JFrame {
                 Object[] filas = new Object[metaData.getColumnCount()];
                 for (int i = 0; i < metaData.getColumnCount(); i++) {
                     filas[i] = rs.getObject(i + 1);
-                   if (i == 5) {
+                   if (i == 6) {
                         total += Double.parseDouble(filas[i].toString());
                     }
                 }
@@ -743,7 +745,7 @@ public class VistaHistorialVenta extends javax.swing.JFrame {
                 Object[] filas = new Object[metaData.getColumnCount()];
                 for (int i = 0; i < metaData.getColumnCount(); i++) {
                     filas[i] = rs.getObject(i + 1);
-                   if (i == 5) {
+                   if (i == 6) {
                         total += Double.parseDouble(filas[i].toString());
                     }
                 }
@@ -770,17 +772,17 @@ public class VistaHistorialVenta extends javax.swing.JFrame {
               String valorSeleccionadoSer = cbCedulaRepuesto.getSelectedItem().toString();
 
         try {
-              if(valorSeleccionadoSer.equals("selecione una cedula")){
+              if(valorSeleccionadoSer.equals("selecione un usuario")){
 
-              JOptionPane.showMessageDialog(null, "selecione la cedula");
+              JOptionPane.showMessageDialog(null, "selecione un usuario");
             }else{
                 try {
             DefaultTableModel model = new DefaultTableModel();
             tablaRepuesto.setModel(model);
             Conexion conetar = new Conexion();
             Connection con = conetar.conexion();
-            PreparedStatement ps = con.prepareCall("call reporterepuestocedula(?)");
-            ps.setString(1, cli.getCedula());
+            PreparedStatement ps = con.prepareCall("call reporterepuestousuario(?)");
+            ps.setString(1, cli.getUsuario());
             ResultSet rs = ps.executeQuery();
             ResultSetMetaData metaData = ps.getMetaData();
 
@@ -792,7 +794,7 @@ public class VistaHistorialVenta extends javax.swing.JFrame {
                 Object[] filas = new Object[metaData.getColumnCount()];
                 for (int i = 0; i < metaData.getColumnCount(); i++) {
                     filas[i] = rs.getObject(i + 1);
-                   if (i == 5) {
+                   if (i == 6) {
                         total += Double.parseDouble(filas[i].toString());
                     }
                 }
@@ -813,7 +815,7 @@ public class VistaHistorialVenta extends javax.swing.JFrame {
         } catch (Exception e) {
         }
     }
-     
+        
     /**
      * @param args the command line arguments
      */

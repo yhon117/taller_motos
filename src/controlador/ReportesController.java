@@ -22,7 +22,7 @@ import modelo.Servicio;
  */
 public class ReportesController {
     
-    public Vector<Cliente> cedula(){
+    public Vector<Cliente> usuario(){
         String sql="select * from cliente";
         Conexion conexion = new Conexion();
         PreparedStatement ps;
@@ -38,13 +38,13 @@ public class ReportesController {
             
             cli=new Cliente();
             cli.setIdCliente(0);
-            cli.setCedula("selecione una cedula");
+            cli.setUsuario("selecione un usuario");
             cliente.add(cli);
             
             while(rs.next()){
                 cli = new Cliente();
                 cli.setIdCliente(rs.getInt("id_cliente"));
-                cli.setCedula(rs.getString("cedula"));
+                cli.setUsuario(rs.getString("usuario"));
                 cliente.add(cli);
             }
             rs.close();
