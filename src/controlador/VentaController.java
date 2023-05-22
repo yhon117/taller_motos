@@ -24,13 +24,16 @@ public class VentaController {
             PreparedStatement ps = null;
             Connection con = conexion.conexion();
 
-            String sql = "INSERT INTO venta(repuesto_idrepuesto, servicios_id_srevicio, moto_idmoto) VALUES (?,?,?)";
+            String sql = "INSERT INTO venta(moto_idmoto,nombreServicio,precioServicio,nombreRepuesto,precioRepuesto) VALUES (?,?,?,?,?)";
             ps = con.prepareStatement(sql);
 
             
-            ps.setInt(1, venta.getIdRepuesto());
-            ps.setInt(2, venta.getIdServicio());
-            ps.setInt(3, venta.getIdMoto());
+            
+            ps.setInt(1, venta.getIdMoto());
+            ps.setString(2, venta.getNombreServicio());
+            ps.setDouble(3, venta.getPrecioServicio());
+            ps.setString(4, venta.getNombreRepuesto());
+            ps.setDouble(5, venta.getPrecioRepuesto());
 
             ps.executeUpdate();
 

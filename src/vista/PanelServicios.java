@@ -353,7 +353,7 @@ public class PanelServicios extends javax.swing.JPanel {
 
     private void cbServiciosItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbServiciosItemStateChanged
         // TODO add your handling code here:
-        
+
         if (evt.getStateChange() == ItemEvent.SELECTED) {
 
             Servicio servicioCon = (Servicio) cbServicios.getSelectedItem();
@@ -377,8 +377,6 @@ public class PanelServicios extends javax.swing.JPanel {
                 while (rs.next()) {
 
                     lbPrecioServicio.setText(rs.getString("precio"));
-
-
 
                 }
 
@@ -410,8 +408,6 @@ public class PanelServicios extends javax.swing.JPanel {
 
                         txtArea.setText(rs.getString("descripcion"));
 
-
-
                     }
 
                 } catch (SQLException e) {
@@ -422,17 +418,11 @@ public class PanelServicios extends javax.swing.JPanel {
 
             }
 
-            
-
-          
-
         }
 
         String valorSeleccionadoSer = cbServicios.getSelectedItem().toString();
 
-             if(valorSeleccionadoSer.equals("seleciona un servicio")){
-
-          
+        if (valorSeleccionadoSer.equals("seleciona un servicio")) {
 
             lbPrecioServicio.setText("");
 
@@ -447,56 +437,49 @@ public class PanelServicios extends javax.swing.JPanel {
 
     private void btnPagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPagarActionPerformed
         // TODO add your handling code here:
-        
+
         Moto motoConn = (Moto) cbElejirMoto.getSelectedItem();
 
-        Servicio serCon = (Servicio)cbServicios.getSelectedItem();
+        Servicio serCon = (Servicio) cbServicios.getSelectedItem();
 
-         String valorSeleccionadoMot = cbElejirMoto.getSelectedItem().toString();
+        String valorSeleccionadoMot = cbElejirMoto.getSelectedItem().toString();
 
-         String valorSeleccionadoSer = cbServicios.getSelectedItem().toString();
+        String valorSeleccionadoSer = cbServicios.getSelectedItem().toString();
 
+        if (valorSeleccionadoMot.equals("selecione una placa")) {
 
+            JOptionPane.showMessageDialog(null, "selecione una placa");
 
-             if(valorSeleccionadoMot.equals("selecione una placa")){
+        } else if (valorSeleccionadoSer.equals("seleciona un servicio")) {
 
-                 JOptionPane.showMessageDialog(null, "selecione una placa");
+            JOptionPane.showMessageDialog(null, "selecione el servicio");
 
-             }else if(valorSeleccionadoSer.equals("seleciona un servicio")){
+        } else {
 
-              JOptionPane.showMessageDialog(null, "selecione el servicio");
+            venta.setIdMoto(motoConn.getIdMoto());
 
+            venta.setNombreServicio(serCon.getNombre());
+            String valor = lbPrecioServicio.getText().toString();
+            venta.setPrecioServicio(Double.parseDouble(valor));
+            venta.setNombreRepuesto("");
+            venta.setPrecioRepuesto(0.0);
 
+            ventaControl.vebntaServicio(venta);
 
-             }else{
+            JOptionPane.showMessageDialog(null, "se realizo el servicio ala moto");
 
-              venta.setIdMoto(motoConn.getIdMoto());
+            //tabla();
+            cbElejirMoto.setSelectedIndex(0);
 
-              venta.setIdServicio(serCon.getIdServicio());
+            cbServicios.setSelectedIndex(0);
 
-              venta.setIdRepuesto(99);
+            lbMarca.setText("");
 
-              
+            lbModelo.setText("");
 
-              ventaControl.vebntaServicio(venta);
+            lbPrecioServicio.setText("");
 
-              JOptionPane.showMessageDialog(null, "se realizo el servicio ala moto");
-
-                 //tabla();
-
-                 cbElejirMoto.setSelectedIndex(0);
-
-                 cbServicios.setSelectedIndex(0);
-
-                 lbMarca.setText("");
-
-                 lbModelo.setText("");
-
-                 lbPrecioServicio.setText("");
-
-                 
-
-             }
+        }
 
 
     }//GEN-LAST:event_btnPagarActionPerformed

@@ -330,8 +330,12 @@ public class PanelRepuestos extends javax.swing.JPanel {
 
         } else {
             venta.setIdMoto(motoConn.getIdMoto());
-            venta.setIdServicio(99);
-            venta.setIdRepuesto(reCon.getIdRepuesto());
+            venta.setNombreRepuesto(reCon.getNombreRepuesto());
+            String valor = lbPrecioRepuesto.getText().toString();
+venta.setPrecioRepuesto(Double.parseDouble(valor));
+venta.setNombreServicio("");
+venta.setPrecioServicio(0.0);
+            
 
             ventaControl.vebntaServicio(venta);
             JOptionPane.showMessageDialog(null, "se realizo el repuesto ala moto");
