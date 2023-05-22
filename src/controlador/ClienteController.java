@@ -144,7 +144,7 @@ public class ClienteController {
             PreparedStatement ps;
             ResultSet rs;
 
-            String sql = "UPDATE cliente SET cedula=?, nombre=?, apellido=?, telefono=?, correo=?, usuario=?,contrasena=?,tipo_idtipo=?";
+            String sql = "UPDATE cliente SET cedula=?, nombre=?, apellido=?, telefono=?, correo=?, usuario=?,contrasena=?,tipo_idtipo=? WHERE id_cliente=?";
             ps = con.prepareStatement(sql);
             ps.setString(1, cliente.getCedula());
             ps.setString(2, cliente.getNombre());
@@ -154,6 +154,7 @@ public class ClienteController {
             ps.setString(6, cliente.getUsuario());
             ps.setString(7, cliente.getPaswoord());
             ps.setInt(8, cliente.getIdTipo());
+            ps.setInt(9, cliente.getIdCliente());
             ps.execute();
             con.close();
             return true;

@@ -29,6 +29,8 @@ public class VistaCrearMoto extends javax.swing.JFrame {
      * Creates new form VistaCrearMoto
      */
     ReportesController reporte = new ReportesController();
+              MotoController motoControl = new MotoController();
+
     Moto moto = new Moto();
     Cliente mod;
 
@@ -43,8 +45,9 @@ public class VistaCrearMoto extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         DefaultComboBoxModel modelo = new DefaultComboBoxModel(reporte.usuario());
         cbUser.setModel(modelo);
-        tabla();
-
+        eliminar();
+LimpiarTablba();
+            tabla();
     }
 
     /**
@@ -68,6 +71,10 @@ public class VistaCrearMoto extends javax.swing.JFrame {
         cbUser = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbMoto = new javax.swing.JTable();
+        txtId = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -112,7 +119,31 @@ public class VistaCrearMoto extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tbMoto.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbMotoMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tbMoto);
+
+        txtId.setText("jTextField1");
+        txtId.setEnabled(false);
+
+        jButton1.setText("jButton1");
+
+        jButton2.setText("Actualizar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jButton3.setText("Limpiar");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jMenu1.setText("Salir");
 
@@ -133,41 +164,49 @@ public class VistaCrearMoto extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(76, 76, 76)
-                        .addComponent(btnGuardar)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addContainerGap()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lbAdmin)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(txtPlaca)
+                                .addComponent(txtMarca)
+                                .addComponent(txtModelo)
+                                .addComponent(txtKilometraje)
+                                .addComponent(txtNumeroChasis)
+                                .addComponent(cbUser, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jLabel1)
+                                .addComponent(btnGuardar)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(lbAdmin))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(21, 21, 21)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(txtPlaca)
-                                    .addComponent(txtMarca)
-                                    .addComponent(txtModelo)
-                                    .addComponent(txtKilometraje)
-                                    .addComponent(txtNumeroChasis)
-                                    .addComponent(cbUser, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                        .addGap(39, 39, 39)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 618, Short.MAX_VALUE)))
+                                .addComponent(jButton1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jButton2)))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 796, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButton3)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(22, 22, 22)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
-                            .addComponent(lbAdmin))
+                            .addComponent(lbAdmin)
+                            .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addComponent(jLabel2)
                         .addGap(18, 18, 18)
@@ -186,7 +225,11 @@ public class VistaCrearMoto extends javax.swing.JFrame {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(18, 18, 18)
-                .addComponent(btnGuardar)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnGuardar)
+                    .addComponent(jButton1)
+                    .addComponent(jButton2)
+                    .addComponent(jButton3))
                 .addGap(15, 15, 15))
         );
 
@@ -235,6 +278,65 @@ public class VistaCrearMoto extends javax.swing.JFrame {
             tabla();
         }
     }//GEN-LAST:event_btnGuardarActionPerformed
+
+    private void tbMotoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbMotoMouseClicked
+        // TODO add your handling code here:
+         int fila = tbMoto.rowAtPoint(evt.getPoint());
+        txtId.setText(tbMoto.getValueAt(fila, 0).toString());
+        txtPlaca.setText(tbMoto.getValueAt(fila, 3).toString());
+        txtMarca.setText(tbMoto.getValueAt(fila, 4).toString());
+        txtModelo.setText(tbMoto.getValueAt(fila, 5).toString());
+        txtKilometraje.setText(tbMoto.getValueAt(fila, 6).toString());
+        txtNumeroChasis.setText(tbMoto.getValueAt(fila, 7).toString());
+        cbUser.setEnabled(false);
+        
+    }//GEN-LAST:event_tbMotoMouseClicked
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        eliminar();
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        if (!txtId.getText().equals("")) {
+            int pregunta = JOptionPane.showConfirmDialog(null, "estas seguro de eliminar");
+            if (pregunta == 0) {
+                String placa = txtPlaca.getText();
+        String marca = txtMarca.getText();
+        String modelo = txtModelo.getText();
+        String kilometraje = txtKilometraje.getText();
+        String numeroChasis = txtNumeroChasis.getText();
+        moto.setPlaca(placa);
+        moto.setMarca(marca);
+        moto.setModelo(modelo);
+        moto.setKilometraje(kilometraje);
+        moto.setNumeroChasis(numeroChasis);
+        
+        
+
+        if (placa.equals("") || modelo.equals("") || marca.equals("") || kilometraje.equals("") || numeroChasis.equals("")) {
+            JOptionPane.showMessageDialog(null, "FALTAN CAMPOS POR LLENAR");
+        } else if(motoControl.existePlaca(placa)!=0) {
+                     JOptionPane.showMessageDialog(null, "EXISTE PLACA");
+
+        }else if(placa.length()<6||placa.length()>6){
+             JOptionPane.showMessageDialog(null, "6 caracteres limite para la placa");
+
+        }else{
+            int id = Integer.parseInt(txtId.getText());
+            moto.setIdMoto(id);
+            motoControl.aptuMoto(moto);
+            JOptionPane.showMessageDialog(null, "moto aptualizada");
+            eliminar();
+            LimpiarTablba();
+            tabla();
+        }
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "elija una moto");
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
     public void eliminar() {
         txtKilometraje.setText("");
         txtMarca.setText("");
@@ -242,6 +344,8 @@ public class VistaCrearMoto extends javax.swing.JFrame {
         txtNumeroChasis.setText("");
         txtPlaca.setText("");
         cbUser.setSelectedIndex(0);
+        txtId.setText("");
+        cbUser.setEnabled(true);
     }
 
     public void tabla() {
@@ -274,6 +378,13 @@ public class VistaCrearMoto extends javax.swing.JFrame {
         } catch (SQLException e) {
             System.out.println(e);
             JOptionPane.showMessageDialog(null, "ERROR");
+        }
+    }
+    public void LimpiarTablba() {
+        DefaultTableModel model = (DefaultTableModel) tbMoto.getModel();
+        for (int i = 0; i < model.getRowCount(); i++) {
+            model.removeRow(i);
+            i = i - 1;
         }
     }
 
@@ -315,6 +426,9 @@ public class VistaCrearMoto extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGuardar;
     private javax.swing.JComboBox<String> cbUser;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu1;
@@ -323,6 +437,7 @@ public class VistaCrearMoto extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lbAdmin;
     private javax.swing.JTable tbMoto;
+    private javax.swing.JTextField txtId;
     private javax.swing.JTextField txtKilometraje;
     private javax.swing.JTextField txtMarca;
     private javax.swing.JTextField txtModelo;

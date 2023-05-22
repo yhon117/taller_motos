@@ -74,6 +74,7 @@ public class VistaCrearClienteAdmin extends javax.swing.JFrame {
         cbTipo = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
         btnActu = new javax.swing.JButton();
+        txtId = new javax.swing.JTextField();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -184,6 +185,9 @@ public class VistaCrearClienteAdmin extends javax.swing.JFrame {
             }
         });
 
+        txtId.setText("jTextField1");
+        txtId.setEnabled(false);
+
         jMenu1.setText("Salir");
 
         jMenuItem1.setText("volvel al menu principal");
@@ -230,10 +234,12 @@ public class VistaCrearClienteAdmin extends javax.swing.JFrame {
                                         .addGap(18, 18, 18)
                                         .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(txtTelefono1)
+                                    .addComponent(cbTipo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGap(78, 78, 78)
-                                        .addComponent(jLabel2))
-                                    .addComponent(cbTipo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addGap(85, 85, 85)
+                                        .addComponent(jLabel2)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(txtId)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 86, Short.MAX_VALUE)
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 767, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap())
@@ -248,7 +254,9 @@ public class VistaCrearClienteAdmin extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtNombre)
@@ -401,14 +409,15 @@ public class VistaCrearClienteAdmin extends javax.swing.JFrame {
     private void tablaClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaClienteMouseClicked
         // TODO add your handling code here:
         int fila = tablaCliente.rowAtPoint(evt.getPoint());
-        txtNombre.setText(tablaCliente.getValueAt(fila, 0).toString());
-        txtApellido.setText(tablaCliente.getValueAt(fila, 1).toString());
-        txtCedula.setText(tablaCliente.getValueAt(fila, 2).toString());
-        txtTelefono1.setText(tablaCliente.getValueAt(fila, 3).toString());
-        txtCorreo.setText(tablaCliente.getValueAt(fila, 4).toString());
-        txtUseario.setText(tablaCliente.getValueAt(fila, 5).toString());
-        txtPassword.setText(tablaCliente.getValueAt(fila, 6).toString());
-        cbTipo.setSelectedItem(tablaCliente.getValueAt(fila, 7).toString());
+        txtId.setText(tablaCliente.getValueAt(fila, 0).toString());
+        txtNombre.setText(tablaCliente.getValueAt(fila, 1).toString());
+        txtApellido.setText(tablaCliente.getValueAt(fila, 2).toString());
+        txtCedula.setText(tablaCliente.getValueAt(fila, 3).toString());
+        txtTelefono1.setText(tablaCliente.getValueAt(fila, 4).toString());
+        txtCorreo.setText(tablaCliente.getValueAt(fila, 5).toString());
+        txtUseario.setText(tablaCliente.getValueAt(fila, 6).toString());
+        txtPassword.setText(tablaCliente.getValueAt(fila, 7).toString());
+        cbTipo.setSelectedItem(tablaCliente.getValueAt(fila, 8).toString());
     }//GEN-LAST:event_tablaClienteMouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -429,7 +438,7 @@ public class VistaCrearClienteAdmin extends javax.swing.JFrame {
 
     private void btnActuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActuActionPerformed
         // TODO add your handling code here:
-Cliente cli = (Cliente) cbTipo.getSelectedItem();
+//Cliente cli = (Cliente) cbTipo.getSelectedItem();
         if (!txtCedula.getText().equals("")) {
             int pregunta = JOptionPane.showConfirmDialog(null, "estas seguro de eliminar");
             if (pregunta == 0) {
@@ -450,7 +459,7 @@ Cliente cli = (Cliente) cbTipo.getSelectedItem();
                 cliente.setCorreo(correo);
                 cliente.setUsuario(usuario);
                 cliente.setPaswoord(paswoord);
-                cliente.setIdTipo(cli.getIdTipo());
+                cliente.setIdTipo(cbTipo.getSelectedIndex());
 if (txtNombre.getText().equals("") || txtApellido.getText().equals("") || txtCedula.getText().equals("")
                 || txtCorreo.getText().equals("") || txtUseario.getText().equals("")
                 || txtPassword.getText().equals("") || txtTelefono1.getText().equals("") || valorSeleccionadoSer.equals("seleciona un rol")) {
@@ -469,6 +478,8 @@ if (txtNombre.getText().equals("") || txtApellido.getText().equals("") || txtCed
                         JOptionPane.showMessageDialog(null, "ya existe esa contraseña");
 
                     } else {
+                        int id=Integer.parseInt(txtId.getText());
+                        cliente.setIdCliente(id);
                         controlCliente.aptualizarCliente(cliente);
                         JOptionPane.showMessageDialog(null, "CUENTA APTUALIZADA");
                         eliminar();
@@ -495,6 +506,7 @@ if (txtNombre.getText().equals("") || txtApellido.getText().equals("") || txtCed
         txtUseario.setText("");
         txtTelefono1.setText("");
         cbTipo.setSelectedIndex(0);
+        txtId.setText("");
     }
 
     public void tabla() {
@@ -590,6 +602,7 @@ if (txtNombre.getText().equals("") || txtApellido.getText().equals("") || txtCed
     private javax.swing.JTextField txtApellido;
     private javax.swing.JTextField txtCedula;
     private javax.swing.JTextField txtCorreo;
+    private javax.swing.JTextField txtId;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JPasswordField txtPassword;
     private javax.swing.JTextField txtTelefono1;
