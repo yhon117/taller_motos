@@ -28,7 +28,7 @@ public class MotoController {
             PreparedStatement ps;
             ResultSet rs;
 
-            String sql = "INSERT INTO moto(placa, marca, modelo, kilometraje, numeroChasis, cliente_id_cliente) VALUES(?,?,?,?,?,?)";
+            String sql = "call insertarmoto(?,?,?,?,?,?)";
             ps = con.prepareStatement(sql);
             ps.setString(1, moto.getPlaca());
             ps.setString(2, moto.getMarca());
@@ -55,7 +55,7 @@ System.out.println(e);
             Connection con = conexion.conexion();
             PreparedStatement ps;
             ResultSet rs;
-            String sql = "select count(idmoto) from moto where placa=?";
+            String sql = "call existeplaca(?)";
             ps = con.prepareStatement(sql);
             ps.setString(1, placa);
             rs=ps.executeQuery();
@@ -82,7 +82,7 @@ public boolean aptuMoto(Moto moto) {
             PreparedStatement ps;
             ResultSet rs;
 
-            String sql = "UPDATE moto SET placa=?, marca=?, modelo=?, kilometraje=?, numeroChasis=? WHERE idmoto=?";
+            String sql = "call aptumoto(?,?,?,?,?,?)";
             ps = con.prepareStatement(sql);
             ps.setString(1, moto.getPlaca());
             ps.setString(2, moto.getMarca());

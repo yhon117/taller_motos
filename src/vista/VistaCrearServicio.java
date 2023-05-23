@@ -7,6 +7,7 @@ package vista;
 
 import conexion.Conexion;
 import controlador.ReportesController;
+import controlador.ServicioController;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -28,6 +29,7 @@ public class VistaCrearServicio extends javax.swing.JFrame {
      */
     Servicio servicio = new Servicio();
     ReportesController reporte = new ReportesController();
+    ServicioController control = new ServicioController();
     Cliente mod;
     public VistaCrearServicio() {
         initComponents();
@@ -61,6 +63,10 @@ public class VistaCrearServicio extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tablaServicio = new javax.swing.JTable();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
+        txtId = new javax.swing.JTextField();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -113,7 +119,36 @@ public class VistaCrearServicio extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tablaServicio.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablaServicioMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(tablaServicio);
+
+        jButton2.setText("Aptualizar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jButton3.setText("Eliminar");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        jButton4.setText("Limpiar");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
+        txtId.setText("jTextField1");
+        txtId.setEnabled(false);
 
         jMenu1.setText("Salir");
 
@@ -141,7 +176,9 @@ public class VistaCrearServicio extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(lbAdmin))
+                                .addComponent(lbAdmin)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(txtNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 235, Short.MAX_VALUE)
                                 .addComponent(txtPrecio))))
@@ -152,8 +189,14 @@ public class VistaCrearServicio extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(75, 75, 75)
-                        .addComponent(jButton1)))
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton1)
+                            .addComponent(jButton3))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton4)
+                            .addComponent(jButton2))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 80, Short.MAX_VALUE)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(16, 16, 16))
@@ -161,10 +204,11 @@ public class VistaCrearServicio extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(18, 18, 18)
+                .addGap(14, 14, 14)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(lbAdmin))
+                    .addComponent(lbAdmin)
+                    .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -174,11 +218,17 @@ public class VistaCrearServicio extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jButton2))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton3)
+                    .addComponent(jButton4))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 38, Short.MAX_VALUE))
         );
 
         pack();
@@ -229,11 +279,73 @@ public class VistaCrearServicio extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
-    
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        eliminar();
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        
+        if (!txtId.getText().equals("")) {
+            int pregunta = JOptionPane.showConfirmDialog(null, "estas seguro de aptualizar");
+            if (pregunta == 0) {
+                servicio.setNombre(txtNombre.getText());
+                double precio = Double.parseDouble(txtPrecio.getText());
+                servicio.setPrecio(precio);
+                servicio.setDescripcion(txtDescripcion.getText());
+                int id=Integer.parseInt(txtId.getText());
+                servicio.setIdServicio(id);
+                control.aptuServicio(servicio);
+                JOptionPane.showMessageDialog(rootPane, "servicio aptualizado");
+                eliminar();
+                LimpiarTablba();
+                tabla();
+                
+
+            }
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void tablaServicioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaServicioMouseClicked
+        // TODO add your handling code here:
+        int fila = tablaServicio.rowAtPoint(evt.getPoint());
+        txtId.setText(tablaServicio.getValueAt(fila, 0).toString());
+        txtNombre.setText(tablaServicio.getValueAt(fila, 1).toString());
+        txtDescripcion.setText(tablaServicio.getValueAt(fila, 2).toString());
+        txtPrecio.setText(tablaServicio.getValueAt(fila, 3).toString());
+    }//GEN-LAST:event_tablaServicioMouseClicked
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        if (!txtId.getText().equals("")) {
+            int pregunta = JOptionPane.showConfirmDialog(null, "estas seguro de eliminar");
+            if (pregunta == 0) {
+                
+                int id=Integer.parseInt(txtId.getText());
+                control.eliminarServicio(id);
+                JOptionPane.showMessageDialog(rootPane, "servicio eliminado");
+                eliminar();
+                LimpiarTablba();
+                tabla();
+                
+
+            }
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    public void LimpiarTablba() {
+        DefaultTableModel model = (DefaultTableModel) tablaServicio.getModel();
+        for (int i = 0; i < model.getRowCount(); i++) {
+            model.removeRow(i);
+            i = i - 1;
+        }
+    }
     public void eliminar(){
         txtNombre.setText("");
         txtDescripcion.setText("");
         txtPrecio.setText("");
+        txtId.setText("");
     }
     
     public void tabla(){
@@ -306,6 +418,9 @@ public class VistaCrearServicio extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu1;
@@ -316,6 +431,7 @@ public class VistaCrearServicio extends javax.swing.JFrame {
     private javax.swing.JLabel lbAdmin;
     private javax.swing.JTable tablaServicio;
     private javax.swing.JTextArea txtDescripcion;
+    private javax.swing.JTextField txtId;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtPrecio;
     // End of variables declaration//GEN-END:variables

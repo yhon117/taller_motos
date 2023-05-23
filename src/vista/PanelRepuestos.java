@@ -242,8 +242,9 @@ public class PanelRepuestos extends javax.swing.JPanel {
                 ResultSet rs;
                 Conexion conetar = new Conexion();
                 Connection con = conetar.conexion();
-                String sql = "select costo from repuesto where idrepuesto=" + repuestoCon.getIdRepuesto();
+                String sql = "call elejirpreciorepuesto(?)";
                 ps = con.prepareStatement(sql);
+                ps.setInt(1, repuestoCon.getIdRepuesto());
                 rs = ps.executeQuery();
                 while (rs.next()) {
                     lbPrecioRepuesto.setText(rs.getString("costo"));
@@ -278,8 +279,10 @@ public class PanelRepuestos extends javax.swing.JPanel {
                 ResultSet rs;
                 Conexion conetar = new Conexion();
                 Connection con = conetar.conexion();
-                String sql = "select marca from moto where idmoto=" + motoCon.getIdMoto();
+                String sql = "call elejirmarcamoro(?)";
                 ps = con.prepareStatement(sql);
+                ps.setInt(1, motoCon.getIdMoto());
+
                 rs = ps.executeQuery();
                 while (rs.next()) {
                     lbMarca.setText(rs.getString("marca"));
@@ -294,8 +297,9 @@ public class PanelRepuestos extends javax.swing.JPanel {
                     ResultSet rs;
                     Conexion conetar = new Conexion();
                     Connection con = conetar.conexion();
-                    String sql = "select modelo from moto where idmoto=" + motoCon.getIdMoto();
+                    String sql = "call elejirmodelomoto(?)" ;
                     ps = con.prepareStatement(sql);
+                    ps.setInt(1, motoCon.getIdMoto());
                     rs = ps.executeQuery();
                     while (rs.next()) {
                         lbModelo.setText(rs.getString("modelo"));
@@ -332,10 +336,9 @@ public class PanelRepuestos extends javax.swing.JPanel {
             venta.setIdMoto(motoConn.getIdMoto());
             venta.setNombreRepuesto(reCon.getNombreRepuesto());
             String valor = lbPrecioRepuesto.getText().toString();
-venta.setPrecioRepuesto(Double.parseDouble(valor));
-venta.setNombreServicio("");
-venta.setPrecioServicio(0.0);
-            
+            venta.setPrecioRepuesto(Double.parseDouble(valor));
+            venta.setNombreServicio("");
+            venta.setPrecioServicio(0.0);
 
             ventaControl.vebntaServicio(venta);
             JOptionPane.showMessageDialog(null, "se realizo el repuesto ala moto");

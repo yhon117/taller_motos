@@ -24,7 +24,7 @@ public class VentaController {
             PreparedStatement ps = null;
             Connection con = conexion.conexion();
 
-            String sql = "INSERT INTO venta(moto_idmoto,nombreServicio,precioServicio,nombreRepuesto,precioRepuesto) VALUES (?,?,?,?,?)";
+            String sql = "call isertarventa(?,?,?,?,?)";
             ps = con.prepareStatement(sql);
 
             

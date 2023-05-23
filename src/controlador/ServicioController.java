@@ -28,7 +28,7 @@ import modelo.Servicio;
 public class ServicioController {
 
     public Vector<Servicio> nombreServicio() {
-        String sql = "select * from servicios where id_srevicio !=99";
+        String sql = "call servicocom()";
         Conexion conexion = new Conexion();
 
         PreparedStatement ps;
@@ -61,7 +61,7 @@ public class ServicioController {
     }
 
     public Vector<Moto> nombreMoto(int id) {
-        String sql = "select*from moto where cliente_id_cliente=?";
+        String sql = "call motocom(?)";
         Conexion conexion = new Conexion();
         PreparedStatement ps;
         ResultSet rs;
@@ -92,6 +92,54 @@ public class ServicioController {
             JOptionPane.showMessageDialog(null, "ERROR");
         }
         return moto;
+    }
+    
+     public boolean aptuServicio(Servicio servicio){
+                try {
+            Conexion conexion = new Conexion();
+            Connection con = conexion.conexion();
+            PreparedStatement ps;
+            ResultSet rs;
+
+            String sql = "call aptuservicio(?,?,?,?)";
+            ps = con.prepareStatement(sql);
+            ps.setString(1, servicio.getNombre());
+            ps.setString(2, servicio.getDescripcion());
+            ps.setDouble(3, servicio.getPrecio());
+            ps.setInt(4, servicio.getIdServicio());
+            ps.execute();
+            con.close();
+            return true;
+
+        } catch (SQLException e) {
+                    System.out.println(e);
+            JOptionPane.showMessageDialog(null, "ERROR");
+
+        }
+        return false;
+    }
+     
+           public boolean eliminarServicio(int id) {
+      try {
+            Conexion conexion = new Conexion();
+            Connection con = conexion.conexion();
+            PreparedStatement ps;
+            ResultSet rs;
+            String sql = "call elimnarservicio(?)";
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            ps.execute();
+            con.close();
+            ps.close();
+            return true;
+            
+
+        } catch (SQLException e) {
+
+            System.out.println(e);
+            JOptionPane.showMessageDialog(null, "ERROR");
+        }
+        return false;
     }
 
 }

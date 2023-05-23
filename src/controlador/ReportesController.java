@@ -23,7 +23,7 @@ import modelo.Servicio;
 public class ReportesController {
     
     public Vector<Cliente> usuario(){
-        String sql="select * from cliente";
+        String sql="call clientebox()";
         Conexion conexion = new Conexion();
         PreparedStatement ps;
         ResultSet rs;
@@ -62,7 +62,7 @@ public class ReportesController {
             PreparedStatement ps;
             ResultSet rs;
 
-            String sql = "INSERT INTO servicios(nombre, descripcion, precio) VALUES(?,?,?)";
+            String sql = "call isertarservicio(?,?,?)";
             ps = con.prepareStatement(sql);
             ps.setString(1, servicio.getNombre());
             ps.setString(2, servicio.getDescripcion());
@@ -85,7 +85,7 @@ public class ReportesController {
             Connection con = conexion.conexion();
             PreparedStatement ps;
             ResultSet rs;
-            String sql = "select * from servicios where nombre=?";
+            String sql = "call existeservicio(?)";
             ps = con.prepareStatement(sql);
             ps.setString(1, nombre);
             rs = ps.executeQuery();
@@ -107,7 +107,7 @@ System.out.println(e);
             PreparedStatement ps;
             ResultSet rs;
 
-            String sql = "INSERT INTO repuesto(nombreRepuesto,costo) VALUES(?,?)";
+            String sql = "call isertarrepuesto(?,?)";
             ps = con.prepareStatement(sql);
             ps.setString(1, repuesto.getNombreRepuesto());
             ps.setDouble(2, repuesto.getCosto());
@@ -129,7 +129,7 @@ System.out.println(e);
             Connection con = conexion.conexion();
             PreparedStatement ps;
             ResultSet rs;
-            String sql = "select * from repuesto where nombreRepuesto=?";
+            String sql = "call existerepuesto(?)";
             ps = con.prepareStatement(sql);
             ps.setString(1, nombre);
             rs = ps.executeQuery();

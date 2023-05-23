@@ -21,7 +21,7 @@ import modelo.TipoRol;
  */
 public class TipoController {
     public Vector<TipoRol> nombreTipo() {
-        String sql = "select * from tipo";
+        String sql = "call tipocom()";
         Conexion conexion = new Conexion();
 
         PreparedStatement ps;

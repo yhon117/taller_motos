@@ -288,10 +288,9 @@ public class PanelServicios extends javax.swing.JPanel {
 
                 Connection con = conetar.conexion();
 
-                String sql = "select marca from moto where idmoto=" + motoCon.getIdMoto();
-
+                String sql = "call elejirmarcamoro(?)";
                 ps = con.prepareStatement(sql);
-
+                ps.setInt(1, motoCon.getIdMoto());
                 rs = ps.executeQuery();
 
                 while (rs.next()) {
@@ -318,10 +317,9 @@ public class PanelServicios extends javax.swing.JPanel {
 
                     Connection con = conetar.conexion();
 
-                    String sql = "select modelo from moto where idmoto=" + motoCon.getIdMoto();
-
+                    String sql = "call elejirmodelomoto(?)" ;
                     ps = con.prepareStatement(sql);
-
+                    ps.setInt(1, motoCon.getIdMoto());
                     rs = ps.executeQuery();
 
                     while (rs.next()) {

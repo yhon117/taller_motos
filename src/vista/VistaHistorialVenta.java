@@ -551,7 +551,7 @@ public class VistaHistorialVenta extends javax.swing.JFrame {
             Conexion conetar = new Conexion();
             Connection con = conetar.conexion();
             PreparedStatement ps = con.prepareStatement("call reporteservicioid(?)");
-            ps.setInt(1, serCon.getIdServicio());
+            ps.setString(1, serCon.getNombre());
             ResultSet rs = ps.executeQuery();
             ResultSetMetaData metaData = ps.getMetaData();
 
@@ -733,7 +733,7 @@ public class VistaHistorialVenta extends javax.swing.JFrame {
             Conexion conetar = new Conexion();
             Connection con = conetar.conexion();
             PreparedStatement ps = con.prepareStatement("call reporterepuestoid(?)");
-            ps.setInt(1, reCon.getIdRepuesto());
+            ps.setString(1, reCon.getNombreRepuesto());
             ResultSet rs = ps.executeQuery();
             ResultSetMetaData metaData = ps.getMetaData();
 

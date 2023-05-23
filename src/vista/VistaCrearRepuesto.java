@@ -7,6 +7,7 @@ package vista;
 
 import conexion.Conexion;
 import controlador.ReportesController;
+import controlador.RepuestoController;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -27,18 +28,21 @@ public class VistaCrearRepuesto extends javax.swing.JFrame {
      * Creates new form VistaCrearRepuesto
      */
     Repuesto repuesto = new Repuesto();
+    RepuestoController control = new RepuestoController();
     ReportesController reporte = new ReportesController();
     Cliente mod;
+
     public VistaCrearRepuesto() {
         initComponents();
     }
-     public VistaCrearRepuesto(Cliente mod) {
+
+    public VistaCrearRepuesto(Cliente mod) {
         initComponents();
         this.mod = mod;
         lbAdmin.setText(mod.getUsuario());
         this.setLocationRelativeTo(null);
         eliminar();
-         tabla();
+        tabla();
     }
 
     /**
@@ -58,6 +62,10 @@ public class VistaCrearRepuesto extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaRepuesto = new javax.swing.JTable();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
+        txtId = new javax.swing.JTextField();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -72,7 +80,7 @@ public class VistaCrearRepuesto extends javax.swing.JFrame {
         jLabel2.setText("Crear repuesto");
 
         txtNombre.setText("jTextField3");
-        txtNombre.setBorder(javax.swing.BorderFactory.createTitledBorder("Nombre del servicio"));
+        txtNombre.setBorder(javax.swing.BorderFactory.createTitledBorder("Nombre del repuesto"));
         txtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtNombreKeyTyped(evt);
@@ -105,7 +113,36 @@ public class VistaCrearRepuesto extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tablaRepuesto.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablaRepuestoMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tablaRepuesto);
+
+        jButton2.setText("Aptualizar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jButton3.setText("Eliminar");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        jButton4.setText("Limpiar");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
+        txtId.setText("jTextField1");
+        txtId.setEnabled(false);
 
         jMenu1.setText("Salir");
 
@@ -126,23 +163,28 @@ public class VistaCrearRepuesto extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(lbAdmin))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(txtNombre)
-                                .addComponent(txtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(28, 28, 28)
-                                .addComponent(jLabel2))))
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lbAdmin)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(txtNombre)
+                        .addComponent(txtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(34, 34, 34)
-                        .addComponent(jButton1)))
+                        .addGap(28, 28, 28)
+                        .addComponent(jLabel2))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 453, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -150,10 +192,11 @@ public class VistaCrearRepuesto extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(23, 23, 23)
+                .addGap(19, 19, 19)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(lbAdmin))
+                    .addComponent(lbAdmin)
+                    .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -161,7 +204,13 @@ public class VistaCrearRepuesto extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(txtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jButton2))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton3)
+                    .addComponent(jButton4))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -178,7 +227,7 @@ public class VistaCrearRepuesto extends javax.swing.JFrame {
 
     private void txtPrecioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPrecioKeyTyped
         char validar = evt.getKeyChar();
-        if(Character.isLetter(validar)){
+        if (Character.isLetter(validar)) {
             getToolkit().beep();
             evt.consume();
         }
@@ -186,17 +235,17 @@ public class VistaCrearRepuesto extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        String nombre =txtNombre.getText();
+        String nombre = txtNombre.getText();
 
-        if(txtNombre.getText().equals("")||txtPrecio.getText().equals("")){
+        if (txtNombre.getText().equals("") || txtPrecio.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "FALTAN CAMPOS POR LLENAR");
 
-        }else {
-            if(reporte.existeRepuesto(nombre)){
+        } else {
+            if (reporte.existeRepuesto(nombre)) {
                 JOptionPane.showMessageDialog(null, "ya existe un repuesto con este nombre");
 
-            }else{
-                double precio=Double.parseDouble(txtPrecio.getText());
+            } else {
+                double precio = Double.parseDouble(txtPrecio.getText());
                 repuesto.setNombreRepuesto(nombre);
                 repuesto.setCosto(precio);
                 reporte.insertarRepuesto(repuesto);
@@ -215,12 +264,73 @@ public class VistaCrearRepuesto extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
-    public void eliminar(){
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        if (!txtId.getText().equals("")) {
+            int pregunta = JOptionPane.showConfirmDialog(null, "estas seguro de aptualizar");
+            if (pregunta == 0) {
+                repuesto.setNombreRepuesto(txtNombre.getText());
+                double precio = Double.parseDouble(txtPrecio.getText());
+                repuesto.setCosto(precio);
+                int id=Integer.parseInt(txtId.getText());
+                repuesto.setIdRepuesto(id);
+                control.aptuRepuesto(repuesto);
+                JOptionPane.showMessageDialog(rootPane, "repuesto aptualizado");
+                eliminar();
+                LimpiarTablba();
+                tabla();
+                
+
+            }
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void tablaRepuestoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaRepuestoMouseClicked
+        // TODO add your handling code here:
+         int fila = tablaRepuesto.rowAtPoint(evt.getPoint());
+        txtId.setText(tablaRepuesto.getValueAt(fila, 0).toString());
+        txtNombre.setText(tablaRepuesto.getValueAt(fila, 1).toString());
+        txtPrecio.setText(tablaRepuesto.getValueAt(fila, 2).toString());
+    }//GEN-LAST:event_tablaRepuestoMouseClicked
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        if (!txtId.getText().equals("")) {
+            int pregunta = JOptionPane.showConfirmDialog(null, "estas seguro de eliminar");
+            if (pregunta == 0) {
+                
+                int id=Integer.parseInt(txtId.getText());
+                control.eliminarRepuesto(id);
+                JOptionPane.showMessageDialog(rootPane, "repuesto eliminado");
+                eliminar();
+                LimpiarTablba();
+                tabla();
+                
+
+            }
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        eliminar();
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    
+    public void LimpiarTablba() {
+        DefaultTableModel model = (DefaultTableModel) tablaRepuesto.getModel();
+        for (int i = 0; i < model.getRowCount(); i++) {
+            model.removeRow(i);
+            i = i - 1;
+        }
+    }
+    public void eliminar() {
         txtNombre.setText("");
         txtPrecio.setText("");
+        txtId.setText("");
     }
-    
-    public void tabla(){
+
+    public void tabla() {
         try {
             DefaultTableModel model = new DefaultTableModel();
             tablaRepuesto.setModel(model);
@@ -238,7 +348,7 @@ public class VistaCrearRepuesto extends javax.swing.JFrame {
                 Object[] filas = new Object[metaData.getColumnCount()];
                 for (int i = 0; i < metaData.getColumnCount(); i++) {
                     filas[i] = rs.getObject(i + 1);
-                   
+
                 }
                 model.addRow(filas);
             }
@@ -246,13 +356,13 @@ public class VistaCrearRepuesto extends javax.swing.JFrame {
             ps.close();
             ps.close();
             con.close();
-            
 
         } catch (SQLException e) {
             System.out.println(e);
             JOptionPane.showMessageDialog(null, "ERROR");
         }
     }
+
     /**
      * @param args the command line arguments
      */
@@ -290,6 +400,9 @@ public class VistaCrearRepuesto extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu1;
@@ -298,6 +411,7 @@ public class VistaCrearRepuesto extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lbAdmin;
     private javax.swing.JTable tablaRepuesto;
+    private javax.swing.JTextField txtId;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtPrecio;
     // End of variables declaration//GEN-END:variables

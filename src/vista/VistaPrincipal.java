@@ -156,9 +156,9 @@ public class VistaPrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(menuReporte);
 
-        menuCrear.setText("Crear");
+        menuCrear.setText("Crear/Aptualizar/Eliminar");
 
-        jMenuItem2.setText("Crear cliente/admin");
+        jMenuItem2.setText("cliente/admin");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem2ActionPerformed(evt);
@@ -166,7 +166,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
         });
         menuCrear.add(jMenuItem2);
 
-        jMenuItem3.setText("Crear moto");
+        jMenuItem3.setText(" moto");
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem3ActionPerformed(evt);
@@ -174,7 +174,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
         });
         menuCrear.add(jMenuItem3);
 
-        jMenuItem4.setText("Crear servicio");
+        jMenuItem4.setText("servicio");
         jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem4ActionPerformed(evt);
@@ -182,7 +182,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
         });
         menuCrear.add(jMenuItem4);
 
-        jMenuItem5.setText("Crear repuesto");
+        jMenuItem5.setText("repuesto");
         jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem5ActionPerformed(evt);

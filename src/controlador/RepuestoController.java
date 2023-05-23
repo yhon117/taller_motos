@@ -21,7 +21,7 @@ import modelo.Repuesto;
 public class RepuestoController {
     
      public Vector<Repuesto> nombreRepuesto() {
-        String sql = "select * from repuesto where idrepuesto !=99";
+        String sql = "call repuestocom()";
         Conexion conexion = new Conexion();
 
         PreparedStatement ps;
@@ -50,6 +50,52 @@ public class RepuestoController {
 System.out.println(e);
             JOptionPane.showMessageDialog(null, "ERROR");        }
         return repuesto;
+    }
+     public boolean aptuRepuesto(Repuesto repuesto){
+         try {
+            Conexion conexion = new Conexion();
+            Connection con = conexion.conexion();
+            PreparedStatement ps;
+            ResultSet rs;
+
+            String sql = "call apturepuesto(?,?,?)";
+            ps = con.prepareStatement(sql);
+            ps.setString(1, repuesto.getNombreRepuesto());
+            ps.setDouble(2, repuesto.getCosto());
+            ps.setInt(3, repuesto.getIdRepuesto());
+            ps.execute();
+            con.close();
+            return true;
+
+        } catch (SQLException e) {
+                    System.out.println(e);
+            JOptionPane.showMessageDialog(null, "ERROR");
+
+        }
+        return false;
+     }
+     
+      public boolean eliminarRepuesto(int id) {
+      try {
+            Conexion conexion = new Conexion();
+            Connection con = conexion.conexion();
+            PreparedStatement ps;
+            ResultSet rs;
+            String sql = "call eliminarrepuesto(?)";
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            ps.execute();
+            con.close();
+            ps.close();
+            return true;
+            
+
+        } catch (SQLException e) {
+
+            System.out.println(e);
+            JOptionPane.showMessageDialog(null, "ERROR");
+        }
+        return false;
     }
     
 }

@@ -31,7 +31,7 @@ public class LoginController {
             PreparedStatement ps = null;
 
             Conexion conectar = new Conexion();
-            String consulta = "select id_cliente, cedula, nombre, apellido, telefono, correo, usuario,contrasena, tipo_idtipo from cliente where usuario=(?) and contrasena=(?);";
+            String consulta = "call login(?,?)";
             ps = conectar.conexion().prepareStatement(consulta);
 
              

@@ -26,7 +26,7 @@ public class ClienteController {
             PreparedStatement ps;
             ResultSet rs;
 
-            String sql = "INSERT INTO cliente(cedula, nombre, apellido, telefono, correo, usuario,contrasena,tipo_idtipo) VALUES(?,?,?,?,?,?,?,?)";
+            String sql = "call insertarcliente(?,?,?,?,?,?,?,?)";
             ps = con.prepareStatement(sql);
             ps.setString(1, cliente.getCedula());
             ps.setString(2, cliente.getNombre());
@@ -55,7 +55,7 @@ public class ClienteController {
             Connection con = conexion.conexion();
             PreparedStatement ps;
             ResultSet rs;
-            String sql = "select * from cliente where cedula=?";
+            String sql = "call existecedula(?)";
             ps = con.prepareStatement(sql);
             ps.setString(1, cedula);
             rs = ps.executeQuery();
@@ -77,7 +77,7 @@ public class ClienteController {
             Connection con = conexion.conexion();
             PreparedStatement ps;
             ResultSet rs;
-            String sql = "select * from cliente where usuario=?";
+            String sql = "call existeusuario(?)";
             ps = con.prepareStatement(sql);
             ps.setString(1, usuario);
             rs = ps.executeQuery();
@@ -99,7 +99,7 @@ public class ClienteController {
             Connection con = conexion.conexion();
             PreparedStatement ps;
             ResultSet rs;
-            String sql = "select * from cliente where contrasena=?";
+            String sql = "call existecontrasena(?)";
             ps = con.prepareStatement(sql);
             ps.setString(1, paswoord);
             rs = ps.executeQuery();
@@ -114,28 +114,28 @@ public class ClienteController {
 
     }
 
-    public boolean eliminarCliente(String cedula) {
-      try {
-            Conexion conexion = new Conexion();
-            Connection con = conexion.conexion();
-            PreparedStatement ps;
-            ResultSet rs;
-            String sql = "delete from cliente where cedula=?";
-            ps = con.prepareStatement(sql);
-            ps.setString(1, cedula);
-            ps.execute();
-            con.close();
-            ps.close();
-            return true;
-            
-
-        } catch (SQLException e) {
-
-            System.out.println(e);
-            JOptionPane.showMessageDialog(null, "ERROR");
-        }
-        return false;
-    }
+//    public boolean eliminarCliente(String cedula) {
+//      try {
+//            Conexion conexion = new Conexion();
+//            Connection con = conexion.conexion();
+//            PreparedStatement ps;
+//            ResultSet rs;
+//            String sql = "delete from cliente where cedula=?";
+//            ps = con.prepareStatement(sql);
+//            ps.setString(1, cedula);
+//            ps.execute();
+//            con.close();
+//            ps.close();
+//            return true;
+//            
+//
+//        } catch (SQLException e) {
+//
+//            System.out.println(e);
+//            JOptionPane.showMessageDialog(null, "ERROR");
+//        }
+//        return false;
+//    }
     
     public boolean aptualizarCliente(Cliente cliente) {
         try {
@@ -144,7 +144,7 @@ public class ClienteController {
             PreparedStatement ps;
             ResultSet rs;
 
-            String sql = "UPDATE cliente SET cedula=?, nombre=?, apellido=?, telefono=?, correo=?, usuario=?,contrasena=?,tipo_idtipo=? WHERE id_cliente=?";
+            String sql = "call aptucliente(?,?,?,?,?,?,?,?,?)";
             ps = con.prepareStatement(sql);
             ps.setString(1, cliente.getCedula());
             ps.setString(2, cliente.getNombre());
