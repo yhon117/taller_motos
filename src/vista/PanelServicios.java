@@ -100,7 +100,6 @@ public class PanelServicios extends javax.swing.JPanel {
         tablaServicio = new javax.swing.JTable();
         btnPagar = new javax.swing.JButton();
         btnTabla = new javax.swing.JButton();
-        btnFactura = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         lbTotal = new javax.swing.JLabel();
 
@@ -172,13 +171,6 @@ public class PanelServicios extends javax.swing.JPanel {
             }
         });
 
-        btnFactura.setText("Factura");
-        btnFactura.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnFacturaActionPerformed(evt);
-            }
-        });
-
         jLabel7.setText("TOTAL");
 
         lbTotal.setText("jLabel7");
@@ -224,8 +216,6 @@ public class PanelServicios extends javax.swing.JPanel {
                         .addComponent(btnPagar)
                         .addGap(18, 18, 18)
                         .addComponent(btnTabla)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnFactura)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -265,7 +255,6 @@ public class PanelServicios extends javax.swing.JPanel {
                     .addComponent(btnPagar)
                     .addComponent(btnTabla)
                     .addComponent(lbTotal)
-                    .addComponent(btnFactura)
                     .addComponent(jLabel7))
                 .addContainerGap(66, Short.MAX_VALUE))
         );
@@ -509,10 +498,6 @@ public class PanelServicios extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnTablaActionPerformed
 
-    private void btnFacturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFacturaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnFacturaActionPerformed
-
     public void tabla(int id) {
 
         double total = 0;
@@ -553,7 +538,6 @@ public class PanelServicios extends javax.swing.JPanel {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnFactura;
     private javax.swing.JButton btnPagar;
     private javax.swing.JButton btnTabla;
     private javax.swing.JComboBox<String> cbElejirMoto;
