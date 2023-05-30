@@ -32,6 +32,8 @@ AUTO_INCREMENT = 3
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
+insert into tipo(idtipo, tipoperfiles) values('1','cliente');
+insert into tipo(idtipo, tipoperfiles) values('2','administrador');
 
 -- -----------------------------------------------------
 -- Table `taller`.`cliente`
@@ -56,7 +58,8 @@ AUTO_INCREMENT = 24
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
-
+INSERT INTO cliente(cedula, nombre, apellido, telefono, correo, usuario,contrasena,tipo_idtipo) 
+VALUES('7382783947','yhon','rivera','7482784393','ydya@gmail.com','admin','admin123','2');
 -- -----------------------------------------------------
 -- Table `taller`.`moto`
 -- -----------------------------------------------------
