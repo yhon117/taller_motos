@@ -103,6 +103,7 @@ public class PanelServicios extends javax.swing.JPanel {
         jLabel7 = new javax.swing.JLabel();
         lbTotal = new javax.swing.JLabel();
 
+        setBorder(javax.swing.BorderFactory.createTitledBorder("Servicio"));
         setPreferredSize(new java.awt.Dimension(559, 536));
 
         jLabel2.setText("Elija la moto");
@@ -184,7 +185,7 @@ public class PanelServicios extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 547, Short.MAX_VALUE)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 537, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -210,7 +211,7 @@ public class PanelServicios extends javax.swing.JPanel {
                                                 .addComponent(jLabel6)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                                 .addComponent(lbModelo)))))
-                                .addGap(0, 161, Short.MAX_VALUE)))
+                                .addGap(0, 151, Short.MAX_VALUE)))
                         .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnPagar)
@@ -256,7 +257,7 @@ public class PanelServicios extends javax.swing.JPanel {
                     .addComponent(btnTabla)
                     .addComponent(lbTotal)
                     .addComponent(jLabel7))
-                .addContainerGap(66, Short.MAX_VALUE))
+                .addContainerGap(43, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

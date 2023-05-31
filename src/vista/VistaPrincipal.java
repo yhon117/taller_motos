@@ -230,7 +230,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
     private void btnRejistrarMotoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRejistrarMotoActionPerformed
         // TODO add your handling code here:
         PanelCrearMoto panelMoto = new PanelCrearMoto(mod);
-        panelMoto.setSize(500,530);
+        panelMoto.setSize(580,535);
         panelMoto.setLocation(0,0);
         escritorio.removeAll();
         escritorio.add(panelMoto,BorderLayout.CENTER);
@@ -241,7 +241,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
     private void btnServiciosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnServiciosActionPerformed
         // TODO add your handling code here:
        PanelServicios panelServicios = new PanelServicios(mod);
-       panelServicios.setSize(590,540);
+       panelServicios.setSize(590,535);
        panelServicios.setLocation(0,0);
         escritorio.removeAll();
         escritorio.add(panelServicios,BorderLayout.CENTER);
@@ -252,7 +252,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
     private void btnRepuestoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRepuestoActionPerformed
         // TODO add your handling code here:
           PanelRepuestos panelRepuesto = new PanelRepuestos(mod);
-       panelRepuesto.setSize(500,500);
+       panelRepuesto.setSize(580,535);
        panelRepuesto.setLocation(0,0);
         escritorio.removeAll();
         escritorio.add(panelRepuesto,BorderLayout.CENTER);
